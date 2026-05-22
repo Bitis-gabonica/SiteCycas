@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Détails - CYCAS Nutrition</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    <script src="db.js"></script>
+    <style>
+        body.page-detail {
+            background-color: #FDFBF5;
+            background-image: url('assets/illustrations/nutrition_hero_bg.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            color: #111111;
+        }
+
+        .close-btn {
+            position: fixed;
+            top: 2rem;
+            right: 3rem;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 100;
+            transition: transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.3s ease;
+            color: #111111;
+            text-decoration: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .close-btn:hover {
+            transform: scale(1.1) rotate(90deg);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+        }
+
+        .detail-container {
+            max-width: 800px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 12px;
+            padding: 4rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+            margin: 4rem 1rem;
+            animation: fadeInUp 0.6s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+            position: relative;
+            z-index: 10;
+        }
+
+        .detail-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .detail-badge {
+            display: inline-block;
+            padding: 0.4rem 1.2rem;
+            background: rgba(36, 66, 48, 0.05);
+            color: #244230;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            margin-bottom: 1.5rem;
+        }
+
+        .detail-title {
+            font-size: 2.8rem;
+            font-weight: 200;
+            color: #111111;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .detail-image {
+            width: 100%;
+            height: 350px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 8px;
+            margin-bottom: 3rem;
+        }
+
+        .detail-body {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: #444444;
+            font-weight: 300;
+        }
+
+        .detail-body h3 {
+            font-size: 1.3rem;
+            font-weight: 400;
+            color: #111111;
+            margin: 2rem 0 1rem 0;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body class="page-detail">
+    <a href="nutrition.html" class="close-btn">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </a>
+
+    <div class="detail-container" id="detail-content">
+        <!-- Content will be injected by JavaScript -->
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const articleId = urlParams.get('id');
+            const container = document.getElementById('detail-content');
+
+            if (articleId && typeof nutritionDB !== 'undefined') {
+                const article = nutritionDB.find(item => item.id === articleId);
+                
+                if (article) {
+                    container.innerHTML = `
+                        <div class="detail-header">
+                            <span class="detail-badge">${article.category} • ${article.categoryBadge}</span>
+                            <h1 class="detail-title">${article.title}</h1>
+                        </div>
+                        <div class="detail-image" style="background-image: url('${article.image}');"></div>
+                        <div class="detail-body">
+                            ${article.content}
+                        </div>
+                    `;
+                } else {
+                    container.innerHTML = '<div class="detail-header"><h1 class="detail-title">Article non trouvé</h1><p class="detail-body">L\'article que vous cherchez n\'existe pas.</p></div>';
+                }
+            } else {
+                container.innerHTML = '<div class="detail-header"><h1 class="detail-title">Erreur</h1><p class="detail-body">Aucun article sélectionné.</p></div>';
+            }
+        });
+    </script>
+</body>
+</html>

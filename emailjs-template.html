@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body style="margin:0;padding:0;background:#f4f4f0;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">
+
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#f4f4f0;padding:40px 16px;">
+    <tr>
+      <td align="center">
+        <table width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;background:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,0.06);">
+
+          <!-- Header -->
+          <tr>
+            <td style="background:#1c3d2c;padding:28px 36px;">
+              <p style="margin:0;font-size:22px;font-weight:300;letter-spacing:6px;color:#ffffff;text-transform:uppercase;">CYCAS</p>
+              <p style="margin:6px 0 0;font-size:11px;font-weight:400;letter-spacing:2px;color:rgba(255,255,255,0.55);text-transform:uppercase;">Nutrition Préventive</p>
+            </td>
+          </tr>
+
+          <!-- Title -->
+          <tr>
+            <td style="padding:32px 36px 0;">
+              <p style="margin:0 0 4px;font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#1c3d2c;">Nouvelle commande</p>
+              <h1 style="margin:0;font-size:22px;font-weight:400;color:#111111;letter-spacing:-0.3px;">{{order_id}}</h1>
+              <hr style="border:none;border-top:1px solid #ebebeb;margin:24px 0 0;">
+            </td>
+          </tr>
+
+          <!-- Client info -->
+          <tr>
+            <td style="padding:24px 36px 0;">
+              <p style="margin:0 0 16px;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#1c3d2c;">Informations client</p>
+              <table width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td style="padding:7px 0;border-bottom:1px solid #f0f0f0;font-size:12px;font-weight:700;color:#888;width:120px;text-transform:uppercase;letter-spacing:1px;">Nom</td>
+                  <td style="padding:7px 0;border-bottom:1px solid #f0f0f0;font-size:13px;color:#111;">{{client}}</td>
+                </tr>
+                <tr>
+                  <td style="padding:7px 0;border-bottom:1px solid #f0f0f0;font-size:12px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:1px;">Téléphone</td>
+                  <td style="padding:7px 0;border-bottom:1px solid #f0f0f0;font-size:13px;color:#111;">{{phone}}</td>
+                </tr>
+                <tr>
+                  <td style="padding:7px 0;border-bottom:1px solid #f0f0f0;font-size:12px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:1px;">Email</td>
+                  <td style="padding:7px 0;border-bottom:1px solid #f0f0f0;font-size:13px;color:#111;">{{email_client}}</td>
+                </tr>
+                <tr>
+                  <td style="padding:7px 0;font-size:12px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:1px;vertical-align:top;">Adresse</td>
+                  <td style="padding:7px 0;font-size:13px;color:#111;">{{adresse}}</td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Cart -->
+          <tr>
+            <td style="padding:28px 36px 0;">
+              <p style="margin:0 0 16px;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#1c3d2c;">Panier</p>
+              <div style="background:#f8f8f6;border-radius:8px;padding:16px 20px;">
+                <pre style="margin:0;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:13px;line-height:1.7;color:#333;white-space:pre-wrap;">{{panier}}</pre>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Totals -->
+          <tr>
+            <td style="padding:24px 36px 0;">
+              <table width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td style="padding:7px 0;border-bottom:1px solid #ebebeb;font-size:13px;color:#555;">Sous-total</td>
+                  <td style="padding:7px 0;border-bottom:1px solid #ebebeb;font-size:13px;color:#111;text-align:right;">{{sous_total}}</td>
+                </tr>
+                <tr>
+                  <td style="padding:7px 0;border-bottom:1px solid #ebebeb;font-size:13px;color:#555;">Livraison</td>
+                  <td style="padding:7px 0;border-bottom:1px solid #ebebeb;font-size:13px;color:#111;text-align:right;">{{livraison}}</td>
+                </tr>
+                <tr>
+                  <td style="padding:14px 0 0;font-size:13px;font-weight:700;color:#1c3d2c;text-transform:uppercase;letter-spacing:1px;">Total</td>
+                  <td style="padding:14px 0 0;font-size:20px;font-weight:500;color:#1c3d2c;text-align:right;letter-spacing:-0.5px;">{{total}}</td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Payment badge -->
+          <tr>
+            <td style="padding:24px 36px;">
+              <span style="display:inline-block;background:#edf5f0;color:#1c3d2c;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:6px 14px;border-radius:50px;">Wave / Orange Money — NabooPay</span>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="background:#f8f8f6;padding:20px 36px;border-top:1px solid #ebebeb;">
+              <p style="margin:0;font-size:11px;color:#aaa;line-height:1.6;">Notification automatique CYCAS · Ne pas répondre à cet email.</p>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+
+</body>
+</html>

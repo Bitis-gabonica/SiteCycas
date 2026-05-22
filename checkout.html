@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CYCAS — Commander</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <style>
+        *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+        :root {
+            --cream:   #FDFBF5;
+            --img-bg:  #F0EDE5;
+            --black:   #111111;
+            --green:   #244230;
+            --muted:   #2b2b2b;
+            --muted-light: #525252;
+            --divider: rgba(17,17,17,0.12);
+            --nav-h:   68px;
+        }
+
+        body { font-family:'Manrope',sans-serif; background:var(--cream); color:var(--black); min-height:100vh; }
+
+        /* ── NAVBAR ──────────────────────────────────────────── */
+        .navbar {
+            position: fixed; top:0; left:0; width:100%;
+            height: var(--nav-h); padding: 0 3rem;
+            display: flex; justify-content: space-between; align-items: center;
+            background: var(--cream); z-index: 200;
+            border-bottom: 1px solid var(--divider);
+        }
+        .logo a { display: block; }
+        .logo svg { color: var(--black); display: block; }
+        .nav-links { display: flex; gap: 2rem; align-items: center; }
+        .nav-links a {
+            color: var(--muted); text-decoration: none;
+            font-size: 0.82rem; font-weight: 500; transition: color 0.2s;
+        }
+        .nav-links a:hover, .nav-links a.active { color: var(--green); }
+        .nav-action { display: flex; align-items: center; gap: 1.25rem; }
+        .nav-cart {
+            display: flex; align-items: center; gap: 0.45rem;
+            color: var(--muted); text-decoration: none;
+            font-size: 0.72rem; font-weight: 500;
+            letter-spacing: 0.1em; text-transform: uppercase; transition: color 0.2s;
+        }
+        .nav-cart:hover { color: var(--green); }
+        .cart-n {
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 17px; height: 17px;
+            background: var(--green); color: #fff;
+            border-radius: 50%; font-size: 0.58rem; font-weight: 700;
+        }
+        .btn-outline {
+            padding: 0.45rem 1.1rem; border: 1px solid rgba(17,17,17,0.15);
+            border-radius: 50px; color: var(--black); text-decoration: none;
+            font-size: 0.78rem; font-weight: 500; transition: all 0.2s;
+        }
+        .btn-outline:hover { background: var(--green); color: #fff; border-color: var(--green); }
+
+        /* ── LAYOUT ──────────────────────────────────────────── */
+        .main {
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            min-height: 100vh;
+            padding-top: var(--nav-h);
+        }
+
+        /* ── FORM ────────────────────────────────────────────── */
+        .col-form {
+            padding: 5rem 5rem 5rem 2.5rem;
+            border-right: 1px solid var(--divider);
+        }
+
+        .step-n {
+            font-size: 0.65rem; font-weight: 700;
+            letter-spacing: 0.2em; text-transform: uppercase;
+            color: var(--green); margin-bottom: 0.4rem;
+        }
+
+        .step-title {
+            font-size: 1.8rem; font-weight: 400;
+            letter-spacing: -0.01em; margin-bottom: 2.5rem;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            column-gap: 2.5rem;
+        }
+
+        .field { margin-bottom: 1.75rem; }
+        .field.full { grid-column: 1/-1; }
+
+        .field label {
+            display: block;
+            font-size: 0.65rem; font-weight: 700;
+            letter-spacing: 0.15em; text-transform: uppercase;
+            color: var(--green); margin-bottom: 0.6rem;
+            padding-left: 0.5rem;
+        }
+
+        .field input,
+        .field select {
+            width: 100%; background: #ffffff;
+            border: 1px solid rgba(36, 66, 48, 0.15);
+            border-radius: 50px;
+            outline: none; padding: 0.75rem 1.25rem;
+            font-family: 'Manrope',sans-serif;
+            font-size: 0.88rem; font-weight: 500;
+            color: var(--black); transition: all 0.2s ease;
+            appearance: none;
+        }
+        .field input:focus,
+        .field select:focus {
+            border-color: var(--green);
+            background: #ffffff;
+            box-shadow: 0 0 0 3px rgba(36, 66, 48, 0.06);
+        }
+        .field input::placeholder { color: rgba(17,17,17,0.48); font-weight: 400; }
+
+        .field.sel { position: relative; }
+        .field.sel::after {
+            content: '';
+            position: absolute; right: 1.25rem; bottom: 1.1rem;
+            width: 0; height: 0;
+            border-left: 4px solid transparent;
+            border-right: 4px solid transparent;
+            border-top: 5px solid var(--green);
+            pointer-events: none;
+        }
+
+        .form-sep { height: 1px; background: var(--divider); margin: 0.5rem 0 2.5rem; grid-column: 1/-1; }
+
+        .sub-step { grid-column: 1/-1; margin-bottom: 1.5rem; }
+
+        /* Payment options */
+        .pay-opts { display: flex; gap: 0.75rem; grid-column: 1/-1; margin-bottom: 2rem; }
+        .pay-opt {
+            flex: 1; padding: 0.85rem 1.5rem;
+            border-radius: 50px; background: var(--img-bg);
+            cursor: pointer; transition: all 0.2s ease;
+            display: flex; align-items: center; justify-content: center; gap: 0.65rem;
+            border: 1px solid transparent;
+        }
+        .pay-opt input[type="radio"] { display: none; }
+        .pay-opt.on {
+            background: rgba(36, 66, 48, 0.08);
+            border-color: rgba(36, 66, 48, 0.25);
+        }
+        .pay-opt-label { font-size: 0.78rem; font-weight: 600; cursor: pointer; color: var(--green); }
+        .pay-icon { color: var(--green); flex-shrink: 0; display: flex; align-items: center; }
+
+        /* Submit */
+        .submit-wrap { grid-column: 1/-1; margin-top: 0.5rem; }
+
+        .btn-confirm {
+            width: 100%; height: 52px; border-radius: 50px;
+            background: var(--green); color: #fff; border: none;
+            font-family: 'Manrope',sans-serif;
+            font-size: 0.68rem; font-weight: 700;
+            letter-spacing: 0.16em; text-transform: uppercase;
+            cursor: pointer; transition: background 0.25s;
+        }
+        .btn-confirm:hover { background: #1e3828; }
+        .btn-confirm[disabled] { opacity: 0.72; cursor: wait; }
+
+        .form-note {
+            margin-top: 1rem; font-size: 0.72rem;
+            color: var(--muted); font-weight: 500;
+            text-align: center; line-height: 1.7;
+        }
+
+        .checkout-error {
+            display: none;
+            margin-top: 0.85rem;
+            color: #8f241f;
+            font-size: 0.78rem;
+            font-weight: 600;
+            line-height: 1.5;
+            text-align: center;
+        }
+
+        .checkout-error.show { display: block; }
+
+        /* ── ORDER SUMMARY ───────────────────────────────────── */
+        .col-sum { padding: 5rem 2.5rem 5rem 3.5rem; display: flex; flex-direction: column; }
+
+        .sum-label {
+            font-size: 0.65rem; font-weight: 700;
+            letter-spacing: 0.2em; text-transform: uppercase;
+            color: var(--green); margin-bottom: 2rem;
+        }
+
+        .o-item {
+            display: flex; align-items: center; gap: 1rem;
+            padding: 1rem 0; border-bottom: 1px solid var(--divider);
+        }
+        .o-img {
+            width: 52px; height: 52px; border-radius: 8px;
+            background: var(--img-bg); flex-shrink: 0;
+            overflow: hidden; display: flex; align-items: center; justify-content: center;
+        }
+        .o-img img { max-width: 78%; max-height: 78%; object-fit: contain; mix-blend-mode: multiply; }
+        .o-info { flex: 1; min-width: 0; }
+        .o-name { font-size: 0.85rem; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .o-meta { font-size: 0.72rem; color: var(--muted-light); font-weight: 600; margin-top: 0.15rem; }
+        .o-price { font-size: 0.85rem; font-weight: 600; white-space: nowrap; flex-shrink: 0; }
+
+        .sum-rows { margin-top: 1.5rem; }
+        .sum-row { display: flex; justify-content: space-between; align-items: baseline; padding: 0.75rem 0; border-bottom: 1px solid var(--divider); }
+        .sum-k { font-size: 0.78rem; font-weight: 500; color: var(--muted); }
+        .sum-v { font-size: 0.82rem; font-weight: 700; }
+        .sum-total { display: flex; justify-content: space-between; align-items: baseline; padding: 1.5rem 0 0; }
+        .sum-total-k { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
+        .sum-total-v { font-size: 1.6rem; font-weight: 500; letter-spacing: -0.03em; }
+
+        /* ── SUCCESS ─────────────────────────────────────────── */
+        /* ── Payment amount modal ─────────────────────── */
+        .pay-modal {
+            display: none; position: fixed; inset: 0;
+            background: rgba(0,0,0,0.55); backdrop-filter: blur(4px);
+            z-index: 600; align-items: center; justify-content: center; padding: 1.5rem;
+        }
+        .pay-modal.show { display: flex; }
+        .pay-modal-box {
+            background: #fff; border-radius: 16px;
+            padding: 2.8rem 2.5rem 2.4rem;
+            max-width: 400px; width: 100%;
+            text-align: center;
+            box-shadow: 0 24px 60px rgba(0,0,0,0.18);
+            animation: slideUp .35s cubic-bezier(.22,1,.36,1);
+        }
+        @keyframes slideUp {
+            from { opacity:0; transform:translateY(24px); }
+            to   { opacity:1; transform:translateY(0); }
+        }
+        .pay-modal-label {
+            font-size: 0.62rem; font-weight: 700;
+            letter-spacing: 0.18em; text-transform: uppercase;
+            color: var(--green); margin-bottom: 1rem;
+        }
+        .pay-modal-amount {
+            font-size: 3rem; font-weight: 300;
+            letter-spacing: -0.04em; color: #111;
+            line-height: 1; margin-bottom: 1.4rem;
+        }
+        .pay-modal-hint {
+            font-size: 0.78rem; color: #555; line-height: 1.6;
+            margin-bottom: 2rem;
+            padding: 0.9rem 1rem;
+            background: #fff8ec;
+            border-radius: 8px;
+            border-left: 3px solid #e6a817;
+        }
+        .pay-modal-btn {
+            width: 100%; height: 48px; border-radius: 50px;
+            background: var(--green); color: #fff; border: none;
+            font-family: 'Manrope', sans-serif;
+            font-size: 0.72rem; font-weight: 700;
+            letter-spacing: 0.12em; text-transform: uppercase;
+            cursor: pointer; transition: background .2s;
+        }
+        .pay-modal-btn:hover { background: #1e3828; }
+
+        .success {
+            display: none; position: fixed; inset: 0;
+            background: var(--cream); z-index: 500;
+            flex-direction: column; align-items: center;
+            justify-content: center; text-align: center; padding: 2rem;
+        }
+        .success.show { display: flex; }
+        .s-icon {
+            width: 56px; height: 56px; border-radius: 50%;
+            background: rgba(36,66,48,0.08);
+            display: flex; align-items: center; justify-content: center;
+            margin-bottom: 1.5rem; color: var(--green);
+        }
+        .success h2 { font-size: 2rem; font-weight: 200; letter-spacing: -0.02em; margin-bottom: 0.75rem; }
+        .success p { font-size: 0.82rem; color: var(--muted); font-weight: 400; line-height: 1.8; max-width: 340px; margin-bottom: 2.5rem; }
+        .btn-home {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            padding: 0.7rem 1.8rem; border-radius: 50px;
+            background: var(--green); color: #fff; text-decoration: none;
+            font-size: 0.68rem; font-weight: 700;
+            letter-spacing: 0.12em; text-transform: uppercase; transition: background 0.2s;
+        }
+        .btn-home:hover { background: #1e3828; }
+
+        /* Hamburger */
+        .hamburger {
+            display: none; flex-direction: column; justify-content: center; gap: 5px;
+            background: none; border: none; cursor: pointer; padding: 5px 2px;
+            color: var(--muted); flex-shrink: 0;
+        }
+        .hamburger span {
+            display: block; width: 20px; height: 1.5px;
+            background: currentColor; border-radius: 2px;
+            transition: transform 0.28s ease, opacity 0.28s ease;
+        }
+        .hamburger.is-open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+        .hamburger.is-open span:nth-child(2) { opacity: 0; }
+        .hamburger.is-open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+        @media (max-width: 780px) {
+            .navbar { padding: 0 1.5rem; }
+            .hamburger { display: flex; }
+            .nav-links { display: none; }
+            .nav-action .btn-outline { display: none; }
+            .nav-links.nav-open {
+                display: flex !important; flex-direction: column;
+                position: fixed; top: var(--nav-h); left: 0; width: 100%;
+                background: var(--cream); padding: 0.5rem 1.5rem 1.5rem;
+                z-index: 199; border-bottom: 1px solid var(--divider); gap: 0;
+            }
+            .nav-links.nav-open a {
+                padding: 0.9rem 0; border-bottom: 1px solid var(--divider);
+                font-size: 0.88rem; color: var(--black); text-decoration: none;
+            }
+            .nav-links.nav-open a:last-child { border-bottom: none; }
+            .main { grid-template-columns: 1fr; }
+            .col-form { padding: 3rem 1.5rem; border-right: none; border-bottom: 1px solid var(--divider); }
+            .col-sum { padding: 2.5rem 1.5rem; }
+            .form-grid { grid-template-columns: 1fr; }
+            .field.full, .sub-step, .form-sep, .submit-wrap { grid-column: 1; }
+            .pay-opts { grid-column: 1; flex-direction: column; gap: 0.75rem; }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="logo">
+        <a href="index.html">
+            <svg width="110" height="28" viewBox="0 0 120 30" fill="currentColor">
+                <text x="0" y="22" font-family="'Manrope', sans-serif" font-weight="200" font-size="24" letter-spacing="4">CYCAS</text>
+            </svg>
+        </a>
+    </div>
+    <div class="nav-links">
+        <a href="index.html">Accueil</a>
+        <a href="apropos.html">À propos</a>
+        <a href="nutrition.html">Nutrition</a>
+        <a href="produits.html">Nos produits</a>
+        <a href="impact.html">Impact social</a>
+        <a href="blog.html">Blog / Actualités</a>
+    </div>
+    <div class="nav-action">
+        <a href="panier.html" class="nav-cart">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+            </svg>
+            Panier
+            <span class="cart-n" id="cart-n">0</span>
+        </a>
+        <a href="contact.html" class="btn-outline">Contact</a>
+        <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
+
+<main class="main">
+
+    <!-- FORM -->
+    <div class="col-form">
+        <div class="step-n">01</div>
+        <h2 class="step-title">Livraison</h2>
+
+        <form class="form-grid" id="form" onsubmit="submitOrder(event)" novalidate>
+
+            <div class="field">
+                <label>Prénom *</label>
+                <input type="text" id="first-name" name="first_name" placeholder="Awa" required>
+            </div>
+            <div class="field">
+                <label>Nom *</label>
+                <input type="text" id="last-name" name="last_name" placeholder="Ndiaye" required>
+            </div>
+
+            <div class="field full">
+                <label>Adresse *</label>
+                <input type="text" id="address" name="address" placeholder="Rue 10, Mermoz" required>
+            </div>
+
+            <div class="field">
+                <label>Ville *</label>
+                <input type="text" id="city" name="city" placeholder="Dakar" required>
+            </div>
+            <div class="field sel">
+                <label>Région *</label>
+                <select id="region" name="region" required>
+                    <option value="" disabled selected></option>
+                    <option>Dakar</option>
+                    <option>Thiès</option>
+                    <option>Saint-Louis</option>
+                    <option>Diourbel</option>
+                    <option>Ziguinchor</option>
+                    <option>Kaolack</option>
+                    <option>Autre</option>
+                </select>
+            </div>
+
+            <div class="field">
+                <label>Téléphone *</label>
+                <input type="tel" id="phone" name="phone" placeholder="+221 77 000 00 00" required
+                    pattern="[+\d\s\-]{8,20}"
+                    oninvalid="this.setCustomValidity('Veuillez saisir un numéro de téléphone valide.')"
+                    oninput="this.setCustomValidity('')">
+            </div>
+            <div class="field">
+                <label>Email</label>
+                <input type="email" id="email" name="email" placeholder="awa@email.com">
+            </div>
+
+            <div class="form-sep"></div>
+
+            <div class="sub-step">
+                <div class="step-n">02 — Paiement</div>
+            </div>
+
+            <div class="pay-opts">
+                <label class="pay-opt on" id="opt-mobile" onclick="selectPay(this)">
+                    <input type="radio" name="pay" value="mobile" checked>
+                    <span class="pay-icon">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="2" width="14" height="20" rx="2"/><circle cx="12" cy="17" r="1"/></svg>
+                    </span>
+                    <span class="pay-opt-label">Wave / Orange Money</span>
+                </label>
+                <label class="pay-opt" id="opt-livr" onclick="selectPay(this)">
+                    <input type="radio" name="pay" value="livraison">
+                    <span class="pay-icon">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 5v3h-7V8z"/><circle cx="5.5" cy="18.5" r="1.5"/><circle cx="18.5" cy="18.5" r="1.5"/></svg>
+                    </span>
+                    <span class="pay-opt-label">Paiement à la livraison</span>
+                </label>
+            </div>
+
+            <div class="submit-wrap">
+                <button type="submit" class="btn-confirm" id="btn-confirm">Confirmer la commande</button>
+                <p class="checkout-error" id="checkout-error" role="alert"></p>
+                <p class="form-note">Vos données sont traitées de manière confidentielle.<br>Un conseiller vous contacte sous 24h pour confirmer.</p>
+            </div>
+
+        </form>
+    </div>
+
+    <!-- SUMMARY -->
+    <div class="col-sum">
+        <div class="sum-label">Votre commande</div>
+        <div id="o-items"></div>
+        <div class="sum-rows" id="sum-rows"></div>
+    </div>
+
+</main>
+
+<!-- MODALE MONTANT NABOOPAY -->
+<div class="pay-modal" id="pay-modal">
+    <div class="pay-modal-box">
+        <p class="pay-modal-label">Montant exact à régler sur NabooPay</p>
+        <div class="pay-modal-amount" id="pay-modal-amount">—</div>
+        <p class="pay-modal-hint">Sur la page NabooPay, entrez <strong>exactement ce montant</strong> dans le champ prévu.</p>
+        <button class="pay-modal-btn" id="pay-modal-btn">Continuer vers NabooPay &rarr;</button>
+    </div>
+</div>
+
+<div class="success" id="success">
+    <div class="s-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    <h2>Commande reçue</h2>
+    <p>Merci pour votre confiance. Notre équipe vous contacte sous 24h pour confirmer votre commande et organiser la livraison.</p>
+    <a href="index.html" class="btn-home">
+        Retour à l'accueil
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+</div>
+
+<script>
+const SHIP=15000;
+const FARINE_PRICES={'250 g':650,'500 g':1250};
+function getItems(){ try{ return normalizeItems(JSON.parse(localStorage.getItem('cycas_items')||'[]')); }catch(e){ return []; } }
+function setItems(a){ localStorage.setItem('cycas_items',JSON.stringify(a)); }
+function fmt(n){ return n.toLocaleString('fr-FR')+' CFA'; }
+
+function normalizeItems(items){
+    let changed=false;
+    const normalized=items.filter(item=>{
+        if(item.id!=='farine') return true;
+        const hasSize=Object.prototype.hasOwnProperty.call(FARINE_PRICES,item.size);
+        if(!hasSize) changed=true;
+        return hasSize;
+    });
+    normalized.forEach(item=>{
+        if(item.id==='farine' && item.price!==FARINE_PRICES[item.size]){
+            item.key='farine_'+item.size;
+            item.price=FARINE_PRICES[item.size];
+            changed=true;
+        }
+    });
+    if(changed) setItems(normalized);
+    return normalized;
+}
+
+function renderSummary(){
+    const items=getItems();
+    const oWrap=document.getElementById('o-items');
+    const sWrap=document.getElementById('sum-rows');
+    oWrap.innerHTML=''; sWrap.innerHTML='';
+
+    const count=items.reduce((a,i)=>a+i.qty,0);
+    document.getElementById('cart-n').textContent=count;
+
+    if(!items.length){
+        oWrap.innerHTML='<p style="font-size:0.78rem;color:var(--muted);padding:1rem 0">Panier vide</p>';
+        return;
+    }
+
+    items.forEach(item=>{
+        const d=document.createElement('div'); d.className='o-item';
+        d.innerHTML=`
+            <div class="o-img"><img src="${item.image}" alt="${item.name}"></div>
+            <div class="o-info">
+                <div class="o-name">${item.name}</div>
+                <div class="o-meta">${item.size} · Qté ${item.qty}</div>
+            </div>
+            <div class="o-price">${fmt(item.price*item.qty)}</div>`;
+        oWrap.appendChild(d);
+    });
+
+    const sub=items.reduce((a,i)=>a+i.price*i.qty,0);
+    const ship=sub>=SHIP?0:2500;
+    sWrap.innerHTML=`
+        <div class="sum-row"><span class="sum-k">Sous-total</span><span class="sum-v">${fmt(sub)}</span></div>
+        <div class="sum-row"><span class="sum-k">Livraison</span><span class="sum-v">${ship===0?'Gratuite':fmt(ship)}</span></div>
+        <div class="sum-total"><span class="sum-total-k">Total</span><span class="sum-total-v">${fmt(sub+ship)}</span></div>`;
+}
+
+function selectPay(el){
+    document.querySelectorAll('.pay-opt').forEach(o=>o.classList.remove('on'));
+    el.classList.add('on');
+    el.querySelector('input[type="radio"]').checked=true;
+    showCheckoutError('');
+}
+
+function fieldValue(id){
+    const el=document.getElementById(id);
+    return el ? el.value.trim() : '';
+}
+
+function selectedPayment(){
+    const checked=document.querySelector('input[name="pay"]:checked');
+    return checked ? checked.value : 'mobile';
+}
+
+function checkoutCustomer(){
+    return {
+        first_name: fieldValue('first-name'),
+        last_name: fieldValue('last-name'),
+        phone: fieldValue('phone'),
+        email: fieldValue('email'),
+        address: fieldValue('address'),
+        city: fieldValue('city'),
+        region: fieldValue('region')
+    };
+}
+
+function showCheckoutError(message){
+    const el=document.getElementById('checkout-error');
+    if(!el) return;
+    el.textContent=message || '';
+    el.classList.toggle('show', Boolean(message));
+}
+
+function setSubmitting(isSubmitting,label){
+    const btn=document.getElementById('btn-confirm');
+    if(!btn) return;
+    btn.disabled=isSubmitting;
+    btn.textContent=isSubmitting ? label : 'Confirmer la commande';
+}
+
+const NABOO_BASE = 'https://checkout.naboopay.com/checkout-merchant?org=6a0a32aa275f7f1dc709ee34';
+
+const EJS_PUBLIC_KEY  = 'YoSiXtbFHj7UrN8kX';
+const EJS_SERVICE_ID  = 'service_bnoswy2';
+const EJS_TEMPLATE_ID = 'template_a49xad9';
+
+(function(){ emailjs.init({ publicKey: EJS_PUBLIC_KEY }); })();
+
+function handleMobilePayment(items){
+    const c = checkoutCustomer();
+    const orderId = 'CMD-' + new Date().toISOString().slice(0,10).replace(/-/g,'') + '-' + Math.floor(Math.random()*9000+1000);
+    const sub = items.reduce((a,i) => a + i.price * i.qty, 0);
+    const ship = sub >= SHIP ? 0 : 2500;
+    const total = sub + ship;
+
+    const lines = items.map(i => `- ${i.name} x${i.qty} (${i.size}) = ${(i.price*i.qty).toLocaleString('fr-FR')} CFA`).join('\n');
+
+    // Stocker les params email en attendant le retour NabooPay
+    localStorage.setItem('cycas_pending_order', JSON.stringify({ order_id: orderId, total, created_at: new Date().toISOString() }));
+    localStorage.setItem('cycas_pending_email', JSON.stringify({
+        order_id:     orderId,
+        client:       c.first_name + ' ' + c.last_name,
+        phone:        c.phone,
+        email_client: c.email || '—',
+        adresse:      c.address + ', ' + c.city + ', ' + c.region,
+        panier:       lines,
+        sous_total:   sub.toLocaleString('fr-FR') + ' CFA',
+        livraison:    ship === 0 ? 'Gratuite' : ship.toLocaleString('fr-FR') + ' CFA',
+        total:        total.toLocaleString('fr-FR') + ' CFA'
+    }));
+
+    // Construire le lien NabooPay avec URL de retour
+    const base = location.origin + location.pathname;
+    const nabooUrl = NABOO_BASE
+        + '&success_url=' + encodeURIComponent(base + '?payment=success')
+        + '&cancel_url='  + encodeURIComponent(base + '?payment=error');
+
+    // Afficher la modale avec le montant exact
+    document.getElementById('pay-modal-amount').textContent = total.toLocaleString('fr-FR') + ' CFA';
+    document.getElementById('pay-modal').classList.add('show');
+    document.getElementById('pay-modal-btn').onclick = function(){
+        window.location.href = nabooUrl;
+    };
+
+    // Réinitialiser le bouton
+    setSubmitting(false);
+}
+
+function submitOrder(e){
+    e.preventDefault();
+    const form=document.getElementById('form');
+    if(!form.checkValidity()){ form.reportValidity(); return; }
+    const items=getItems();
+    if(!items.length){
+        showCheckoutError('Votre panier est vide.');
+        return;
+    }
+
+    showCheckoutError('');
+
+    if(selectedPayment()==='livraison'){
+        localStorage.removeItem('cycas_items');
+        localStorage.removeItem('cycas_pending_order');
+        document.getElementById('success').classList.add('show');
+        document.body.style.overflow='hidden';
+        return;
+    }
+
+    handleMobilePayment(items);
+}
+
+function handlePaymentReturn(){
+    const params=new URLSearchParams(location.search);
+    const status=params.get('payment');
+    if(status==='success'){
+        // Email envoyé APRÈS confirmation NabooPay
+        try{
+            const ep = JSON.parse(localStorage.getItem('cycas_pending_email') || '{}');
+            if(ep.order_id) emailjs.send(EJS_SERVICE_ID, EJS_TEMPLATE_ID, ep).catch(function(){});
+        }catch(e){}
+        localStorage.removeItem('cycas_items');
+        localStorage.removeItem('cycas_pending_order');
+        localStorage.removeItem('cycas_pending_email');
+        document.getElementById('success').classList.add('show');
+        document.body.style.overflow='hidden';
+        history.replaceState(null,'','checkout.html');
+    }
+    if(status==='error'){
+        showCheckoutError('Le paiement NabooPay n\'a pas été finalisé. Vous pouvez réessayer.');
+        history.replaceState(null,'','checkout.html');
+    }
+}
+
+renderSummary();
+handlePaymentReturn();
+</script>
+<script src="nav.js"></script>
+</body>
+</html>

@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog & Actualités - CYCAS</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body class="page-blog">
+    <header class="nutrition-hero-banner bg-blog reveal-on-scroll">
+        <nav class="navbar navbar-light">
+            <div class="logo">
+                <svg width="120" height="30" viewBox="0 0 120 30" fill="currentColor">
+                    <text x="0" y="22" font-family="'Manrope', sans-serif" font-weight="200" font-size="24" letter-spacing="4">CYCAS</text>
+                </svg>
+            </div>
+            <div class="nav-links">
+                <a href="index.html">Accueil</a>
+                <a href="apropos.html">À propos</a>
+                <a href="nutrition.html">Nutrition</a>
+                <a href="produits.html">Nos produits</a>
+                <a href="impact.html">Impact social</a>
+                <a href="blog.html" class="active">Blog / Actualités</a>
+            </div>
+            <div class="nav-action">
+                <a href="contact.html" class="btn-outline">Contact</a>
+                <a href="panier.html" class="nav-cart-icon" aria-label="Panier">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+                    </svg>
+                    <span class="nav-cart-badge" id="cart-badge">0</span>
+                </a>
+                <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </nav>
+
+        <div class="hero-banner-inner">
+            <span class="eyebrow-text">L'ACTUALITÉ CYCAS</span>
+            <h1>Blog & Actualités</h1>
+            <p>Découvrez nos dernières nouvelles, nos événements, et nos articles d'analyse sur les enjeux de santé publique et de nutrition en Afrique.</p>
+        </div>
+    </header>
+
+    <main>
+        <section class="nutrition-content-section reveal-on-scroll" style="transition-delay: 0.1s; background-color: #FDFBF5; padding-top: 4rem;">
+            <div class="pattern-watermark pattern-cr"></div>
+            
+            <div class="nc-container" style="position: relative; z-index: 2;">
+                <!-- Sidebar -->
+                <aside class="nc-sidebar">
+                    <ul class="nc-filters">
+                        <li><a href="#" class="active" data-category="Tous">Toutes les actualités</a></li>
+                        <li><a href="#" data-category="Actualités">Vie de l'entreprise</a></li>
+                        <li><a href="#" data-category="Santé Publique">Santé & Nutrition</a></li>
+                        <li><a href="#" data-category="Événements">Événements & Partenariats</a></li>
+                        <li><a href="#" data-category="Podcasts & Interviews">Podcasts & Interviews</a></li>
+                    </ul>
+                    <div class="nc-desc">
+                        <p id="category-description">Suivez de près l'évolution de nos projets et nos actions sur le terrain.</p>
+                    </div>
+                </aside>
+
+                <!-- Grid -->
+                <div class="nc-grid" id="blog-grid">
+                    <!-- Cards injected by JS -->
+                </div>
+            </div>
+        </section>
+        
+        <!-- Global CTA Section -->
+        <section class="global-cta-section reveal-on-scroll">
+            <div class="global-cta-content text-center">
+                <h2>Restez informés</h2>
+                <p>Abonnez-vous à notre newsletter pour ne manquer aucune de nos actualités ni nos conseils exclusifs en matière de nutrition préventive.</p>
+                <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 2rem;">
+                    <input type="email" placeholder="Votre adresse e-mail" style="padding: 1rem; border-radius: 50px; border: 1px solid #ddd; width: 300px; font-family: inherit;">
+                    <a href="#" class="btn-green-solid">S'inscrire</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER / CONTACTS -->
+    <footer class="site-footer-new" id="contact">
+        <div class="footer-container">
+            <h2 class="huge-title reveal-on-scroll">Contacts</h2>
+            
+            <div class="contact-grid reveal-on-scroll" style="transition-delay: 0.1s;">
+                <div class="contact-col">
+                    <h4>Adresse</h4>
+                    <p class="contact-detail">Jamm Space<br>Dakar, Sénégal</p>
+                    <a href="contact.html" class="btn-map-outline">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                        Voir la page contact
+                    </a>
+                </div>
+                <div class="contact-col">
+                    <h4>Contacts</h4>
+                    <div class="contact-item">
+                        <span class="contact-sub">Service Client</span>
+                        <p class="contact-detail">+221 00 000 00 00</p>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-sub">Email</span>
+                        <p class="contact-detail">contact@cycas.sn</p>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-sub">Réseaux sociaux</span>
+                        <div class="social-links-new">
+                            <a href="#">Instagram</a>
+                            <a href="#">LinkedIn</a>
+                            <a href="#">Facebook</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-col">
+                    <h4>Horaires</h4>
+                    <div class="schedule-item">
+                        <span class="contact-sub">lun-ven:</span>
+                        <div class="schedule-time">
+                            <span>09:00</span>
+                            <div class="schedule-line"></div>
+                            <span>18:00</span>
+                        </div>
+                    </div>
+                    <div class="schedule-item">
+                        <span class="contact-sub">samedi:</span>
+                        <div class="schedule-time">
+                            <span>10:00</span>
+                            <div class="schedule-line"></div>
+                            <span>14:00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-map reveal-on-scroll" style="transition-delay: 0.2s;">
+                <iframe src="https://maps.google.com/maps?q=Jamm%20Space,%20Dakar,%20Senegal&t=&z=15&ie=UTF8&iwloc=&output=embed" width="100%" height="250" style="border:0; border-radius: 12px; margin-top: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.05);" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+
+            <div class="footer-bottom-new">
+                <div class="footer-logo">CYCAS</div>
+                <div class="footer-nav-new">
+                    <a href="apropos.html">À propos</a>
+                    <a href="produits.html">Produits</a>
+                    <a href="impact.html">Impact</a>
+                    <a href="nutrition.html">Recettes</a>
+                </div>
+                <p>&copy; 2025 CYCAS Nutrition. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const blogDB = [
+            {
+                id: 1,
+                category: "Actualités",
+                date: "24 Mai 2026",
+                title: "CYCAS lance sa nouvelle gamme Moulynak",
+                desc: "Notre nouvelle farine spécialement conçue pour répondre aux besoins nutritionnels des seniors et des personnes en convalescence est enfin disponible.",
+                image: "assets/illustrations/impact_seniors_1778794222300.png"
+            },
+            {
+                id: 2,
+                category: "Événements",
+                date: "12 Mai 2026",
+                title: "Partenariat réussi avec Noflaye Center",
+                desc: "Retour sur notre dernière Masterclass de cuisine diététique organisée avec Noflaye Center, réunissant plus de 50 participants.",
+                image: "assets/illustrations/impact_partnership_1778794235517.png"
+            },
+            {
+                id: 3,
+                category: "Santé Publique",
+                date: "03 Mai 2026",
+                title: "L'alimentation des seniors en Afrique",
+                desc: "Une analyse profonde de notre équipe d'experts sur pourquoi la nutrition des personnes âgées est un enjeu vital souvent négligé.",
+                image: "assets/illustrations/impact_mission_1778794197907.png"
+            },
+            {
+                id: 4,
+                category: "Actualités",
+                date: "15 Avril 2026",
+                title: "De nouvelles coopératives féminines partenaires",
+                desc: "Nous sommes fiers d'annoncer que CYCAS s'approvisionne désormais auprès de 5 nouvelles associations de femmes productrices à Kédougou.",
+                image: "assets/illustrations/impact_women_1778794209637.png"
+            },
+            {
+                id: 5,
+                category: "Santé Publique",
+                date: "02 Avril 2026",
+                title: "Mil et Fonio : les super-aliments de chez nous",
+                desc: "Découvrez pourquoi ces céréales locales sont la base de nos farines enrichies et de nos recommandations quotidiennes.",
+                image: "assets/illustrations/illus_fruits_sn_1778791187291.png"
+            },
+            {
+                id: 6,
+                category: "Podcasts & Interviews",
+                date: "28 Mars 2026",
+                title: "Interview : Dr. Maimouna Diop Ly sur la santé préventive",
+                desc: "Écoutez notre fondatrice expliquer comment l'alimentation locale peut transformer l'espérance de vie en Afrique.",
+                image: "assets/illustrations/impact_seniors_1778794222300.png"
+            }
+        ];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
+            
+            // Script for filtering
+            const filters = document.querySelectorAll('.nc-filters a');
+            const desc = document.getElementById('category-description');
+            const grid = document.getElementById('blog-grid');
+
+            function renderGrid(category) {
+                grid.innerHTML = '';
+                
+                const filteredDB = category === 'Tous' 
+                    ? blogDB 
+                    : blogDB.filter(item => item.category === category);
+                
+                filteredDB.forEach((article, index) => {
+                    const delay = (index % 10) * 0.1;
+                    const cardHTML = `
+                        <a href="#" class="nutrition-card reveal-on-scroll is-visible" style="transition-delay: ${delay}s; text-decoration: none;">
+                            <div class="ncard-img-wrapper">
+                                <div class="ncard-img" style="background-image: url('${article.image}');"></div>
+                            </div>
+                            <div class="ncard-content">
+                                <span style="font-size: 0.75rem; color: #244230; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem;">${article.date}</span>
+                                <h4>${article.title}</h4>
+                                <p>${article.desc}</p>
+                            </div>
+                        </a>
+                    `;
+                    grid.innerHTML += cardHTML;
+                });
+            }
+
+            renderGrid('Tous');
+
+            filters.forEach(filter => {
+                filter.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    filters.forEach(f => f.classList.remove('active'));
+                    e.target.classList.add('active');
+                    
+                    const selectedCategory = e.target.getAttribute('data-category');
+                    renderGrid(selectedCategory);
+                    
+                    desc.style.opacity = 0;
+                    setTimeout(() => {
+                        desc.textContent = "Catégorie : " + e.target.textContent;
+                        desc.style.opacity = 1;
+                    }, 300);
+                });
+            });
+        });
+    </script>
+    <script src="nav.js"></script>
+</body>
+</html>

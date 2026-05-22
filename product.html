@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="page-title">CYCAS — Produit</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+        :root {
+            --cream:   #FDFBF5;
+            --white-glass: rgba(255, 255, 255, 0.95);
+            --black:   #111111;
+            --green:   #244230;
+            --green-hover: #1a3022;
+            --muted-dark: #333333;
+            --muted-light: #555555;
+            --divider: rgba(36, 66, 48, 0.08);
+            --shadow: 0 20px 40px rgba(36, 66, 48, 0.08);
+        }
+
+        body {
+            font-family: 'Manrope', sans-serif;
+            background-color: var(--cream);
+            background-image: url('assets/illustrations/apropos_hero_bg.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: var(--black);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 4rem 1.5rem;
+            overflow-x: hidden;
+        }
+
+        /* Close Button */
+        .close-btn {
+            position: fixed;
+            top: 2rem;
+            right: 3rem;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 100;
+            transition: transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.3s ease;
+            color: #111111;
+            text-decoration: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        .close-btn:hover {
+            transform: scale(1.1) rotate(90deg);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+        }
+
+        /* Floating Container */
+        .product-detail-container {
+            max-width: 1020px;
+            width: 100%;
+            background: var(--white-glass);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 16px;
+            padding: 4rem;
+            box-shadow: var(--shadow);
+            margin: 2rem auto;
+            display: grid;
+            grid-template-columns: 46% 54%;
+            gap: 3.5rem;
+            align-items: start;
+            animation: fadeInUp 0.6s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Left Column: Gallery */
+        .product-gallery {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            width: 100%;
+        }
+        .slider-outer {
+            position: relative;
+            width: 100%;
+            border-radius: 12px;
+            background: #ffffff;
+            aspect-ratio: 1 / 1;
+            overflow: hidden;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.015);
+            border: 1px solid rgba(36, 66, 48, 0.04);
+        }
+        .slider-inner {
+            display: flex;
+            height: 100%;
+            transition: transform 0.6s cubic-bezier(0.77,0,0.175,1);
+        }
+        .sl-frame {
+            min-width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        .sl-frame img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            mix-blend-mode: multiply;
+            display: block;
+        }
+        
+        .thumbs-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+        .thumbs-wrapper::-webkit-scrollbar { display: none; }
+        
+        .thumbs {
+            display: flex;
+            justify-content: center;
+            gap: 0.75rem;
+        }
+        .th {
+            width: 68px;
+            height: 68px;
+            border-radius: 10px;
+            overflow: hidden;
+            cursor: pointer;
+            opacity: 0.4;
+            border: 2px solid transparent;
+            background: #ffffff;
+            transition: all 0.25s ease;
+            flex-shrink: 0;
+        }
+        .th img { width: 100%; height: 100%; object-fit: cover; mix-blend-mode: multiply; }
+        .th.on { opacity: 1; border-color: var(--green); }
+        .th:hover:not(.on) { opacity: 0.7; }
+
+        .sl-lines {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            margin-top: 0.5rem;
+        }
+        .sl-line {
+            height: 2px; width: 14px;
+            background: rgba(36, 66, 48, 0.15);
+            cursor: pointer; transition: all 0.3s ease; border-radius: 1px;
+        }
+        .sl-line.on { width: 30px; background: var(--green); }
+
+        /* Right Column: Details */
+        .det {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+        .d-eyebrow {
+            font-size: 0.7rem; font-weight: 700;
+            letter-spacing: 0.15em; text-transform: uppercase;
+            color: var(--green); margin-bottom: 0.75rem;
+        }
+        .d-name {
+            font-size: clamp(2rem, 3.5vw, 2.8rem);
+            font-weight: 300; letter-spacing: -0.02em; line-height: 1.15;
+            color: var(--green); margin-bottom: 0.5rem;
+        }
+        .d-tagline {
+            font-size: 0.95rem; color: var(--muted-light);
+            font-weight: 400; margin-bottom: 1.75rem;
+        }
+        .d-rule { width: 40px; height: 1px; background: var(--divider); margin-bottom: 1.75rem; }
+        .d-desc {
+            font-size: 0.95rem; line-height: 1.75;
+            color: var(--muted-dark); font-weight: 400; margin-bottom: 2rem;
+        }
+        .size-label {
+            font-size: 0.7rem; font-weight: 700;
+            letter-spacing: 0.15em; text-transform: uppercase;
+            color: var(--green); margin-bottom: 0.75rem;
+        }
+        .pills { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2rem; }
+        .pill {
+            padding: 0.5rem 1.25rem; border-radius: 50px;
+            border: 1px solid rgba(36, 66, 48, 0.2); background: transparent;
+            font-family: 'Manrope', sans-serif;
+            font-size: 0.85rem; font-weight: 500;
+            cursor: pointer; color: var(--green);
+            transition: all 0.2s ease; letter-spacing: 0.02em;
+        }
+        .pill:hover:not(.on) { background: rgba(36, 66, 48, 0.05); }
+        .pill.on { background: var(--green); color: #fff; border-color: var(--green); }
+
+        .price-row {
+            display: flex; align-items: baseline; gap: 0.5rem; margin-bottom: 2.2rem;
+        }
+        .price-n {
+            font-size: 2.8rem; font-weight: 300;
+            letter-spacing: -0.03em; color: var(--black);
+            transition: opacity 0.15s ease;
+        }
+        .price-u { font-size: 0.95rem; color: var(--green); font-weight: 600; letter-spacing: 0.05em; }
+
+        .action-row { display: flex; align-items: center; gap: 2rem; margin-bottom: 2.5rem; }
+        .qty { display: flex; align-items: center; gap: 1.25rem; }
+        .q-btn {
+            width: 32px; height: 32px; border-radius: 50%; border: none;
+            background: rgba(36, 66, 48, 0.05); color: var(--green);
+            cursor: pointer; font-size: 1.1rem;
+            display: flex; align-items: center; justify-content: center;
+            transition: all 0.2s ease; font-family: 'Manrope', sans-serif; line-height: 1;
+        }
+        .q-btn:hover { background: var(--green); color: #fff; }
+        .q-n { font-size: 1.05rem; font-weight: 600; min-width: 18px; text-align: center; color: var(--black); }
+
+        .btn-add {
+            flex: 1; height: 48px; border-radius: 50px;
+            background: var(--green); color: #fff; border: none;
+            font-family: 'Manrope', sans-serif;
+            font-size: 0.75rem; font-weight: 700;
+            letter-spacing: 0.15em; text-transform: uppercase;
+            cursor: pointer; transition: all 0.25s ease;
+        }
+        .btn-add:hover { background: var(--green-hover); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(36,66,48,0.2); }
+        .btn-add:active { transform: translateY(0); opacity: 0.9; }
+
+        /* Specs */
+        .specs { border-top: 1px solid var(--divider); padding-top: 0.5rem; }
+        .spec {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0.9rem 0; border-bottom: 1px solid var(--divider);
+        }
+        .spec-k { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--green); }
+        .spec-v { font-size: 0.88rem; font-weight: 400; color: var(--black); }
+
+        /* Similar Products Section */
+        .sim-section {
+            max-width: 1020px;
+            width: 100%;
+            margin: 4rem auto;
+            padding: 0 1rem;
+        }
+        .sim-label {
+            font-size: 0.75rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase;
+            color: var(--green); margin-bottom: 2rem; text-align: center;
+        }
+        .sim-scroll {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+        .sim-card {
+            text-decoration: none; color: var(--black); cursor: pointer;
+            background: var(--white-glass); border-radius: 12px;
+            padding: 1.5rem; display: flex; flex-direction: column; align-items: center;
+            transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+            box-shadow: 0 4px 12px rgba(36, 66, 48, 0.02);
+            border: 1px solid rgba(36, 66, 48, 0.04);
+        }
+        .sim-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); border-color: var(--green); }
+        .sim-img-wrap {
+            height: 150px; width: 100%; background: #ffffff; border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+            padding: 1rem; margin-bottom: 1.25rem; overflow: hidden;
+            border: 1px solid rgba(36, 66, 48, 0.02);
+        }
+        .sim-img-wrap img { max-width: 100%; max-height: 100%; object-fit: contain; mix-blend-mode: multiply; }
+        .sim-name { font-size: 0.95rem; font-weight: 500; margin-bottom: 0.35rem; color: var(--green); }
+        .sim-price { font-size: 0.85rem; color: var(--muted-light); font-weight: 400; }
+
+        /* Toast Alert */
+        .toast {
+            position: fixed; bottom: 6.5rem; left: 50%;
+            transform: translateX(-50%) translateY(calc(100% + 6.5rem));
+            background: var(--green); color: #fff;
+            padding: 0.8rem 1.75rem; border-radius: 50px;
+            font-size: 0.8rem; font-weight: 600; letter-spacing: 0.05em;
+            z-index: 500;
+            transition: transform 0.4s cubic-bezier(0.165,0.84,0.44,1);
+            display: flex; align-items: center; gap: 0.65rem;
+            box-shadow: 0 10px 25px rgba(36, 66, 48, 0.25);
+        }
+        .toast.show { transform: translateX(-50%) translateY(0); }
+
+        /* Floating Cart Button */
+        .cart-fab {
+            position: fixed; bottom: 2rem; left: 50%;
+            transform: translateX(-50%) translateY(calc(100% + 4rem));
+            z-index: 400;
+            display: flex; align-items: center; gap: 0.75rem;
+            background: var(--green); color: #fff;
+            text-decoration: none;
+            padding: 0.85rem 1.8rem 0.85rem 1.5rem;
+            border-radius: 50px;
+            font-family: 'Manrope', sans-serif;
+            font-size: 0.72rem; font-weight: 700;
+            letter-spacing: 0.1em; text-transform: uppercase;
+            box-shadow: 0 8px 28px rgba(36, 66, 48, 0.35);
+            transition: transform 0.45s cubic-bezier(0.165,0.84,0.44,1),
+                        background 0.2s ease,
+                        box-shadow 0.2s ease;
+            white-space: nowrap;
+        }
+        .cart-fab.visible { transform: translateX(-50%) translateY(0); }
+        .cart-fab:hover { background: var(--green-hover); box-shadow: 0 12px 36px rgba(36, 66, 48, 0.45); }
+
+        .cart-fab-badge {
+            display: inline-flex; align-items: center; justify-content: center;
+            min-width: 20px; height: 20px;
+            background: #fff; color: var(--green);
+            border-radius: 50px;
+            font-size: 0.62rem; font-weight: 800;
+            padding: 0 5px;
+            animation: none;
+        }
+        .cart-fab-badge.bump {
+            animation: bump 0.35s cubic-bezier(0.36,0.07,0.19,0.97) forwards;
+        }
+        @keyframes bump {
+            0%   { transform: scale(1); }
+            40%  { transform: scale(1.5); }
+            70%  { transform: scale(0.9); }
+            100% { transform: scale(1); }
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            body { padding: 2rem 1rem; }
+            .close-btn { top: 1.5rem; right: 1.5rem; width: 40px; height: 40px; }
+            .product-detail-container {
+                grid-template-columns: 1fr;
+                padding: 2.5rem 1.5rem;
+                margin: 4.5rem auto 2rem;
+                gap: 2.5rem;
+            }
+            .slider-outer { max-width: 400px; margin: 0 auto; }
+            .thumbs { gap: 0.5rem; }
+            .th { width: 56px; height: 56px; }
+            .sim-scroll { grid-template-columns: 1fr; gap: 1.25rem; }
+            .d-name { font-size: 1.8rem; }
+            .price-n { font-size: 2.4rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Immersion Close Button -->
+<a href="produits.html" class="close-btn" aria-label="Retour au catalogue">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+    </svg>
+</a>
+
+<div class="product-detail-container">
+
+    <!-- LEFT COLUMN: PHOTO GALLERY -->
+    <div class="product-gallery">
+        <div class="slider-outer">
+            <div class="slider-inner" id="slider-inner"></div>
+        </div>
+        <div class="thumbs-wrapper">
+            <div class="thumbs" id="thumbs"></div>
+        </div>
+        <div class="sl-lines" id="sl-lines"></div>
+    </div>
+
+    <!-- RIGHT COLUMN: DETAILED INFO -->
+    <div class="det">
+        <div class="d-eyebrow" id="d-tag"></div>
+        <h1 class="d-name" id="d-name"></h1>
+        <p class="d-tagline" id="d-tagline"></p>
+        <div class="d-rule"></div>
+        <p class="d-desc" id="d-desc"></p>
+
+        <div class="size-label">Quantité / Format</div>
+        <div class="pills" id="pills"></div>
+
+        <div class="price-row">
+            <span class="price-n" id="price-n">—</span>
+            <span class="price-u">CFA</span>
+        </div>
+
+        <div class="action-row">
+            <div class="qty">
+                <button class="q-btn" onclick="decQ()">−</button>
+                <span class="q-n" id="q-n">1</span>
+                <button class="q-btn" onclick="incQ()">+</button>
+            </div>
+            <button class="btn-add" onclick="addCart()">Ajouter au panier</button>
+        </div>
+
+        <div class="specs" id="specs"></div>
+    </div>
+
+</div>
+
+<!-- SIMILAR PRODUCTS -->
+<section class="sim-section">
+    <div class="sim-label">Produits similaires</div>
+    <div class="sim-scroll" id="sim-scroll"></div>
+</section>
+
+<!-- TOAST ALERT -->
+<div class="toast" id="toast">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round">
+        <polyline points="20 6 9 17 4 12"/>
+    </svg>
+    Ajouté au panier !
+</div>
+
+<!-- FLOATING CART -->
+<a href="panier.html" class="cart-fab" id="cart-fab" aria-label="Voir le panier">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+    </svg>
+    Voir le panier
+    <span class="cart-fab-badge" id="cart-fab-badge">0</span>
+</a>
+
+<script>
+const C = {
+    moulynak: {
+        id:'moulynak', tag:'Farine composée',
+        name:'Moulynak',
+        tagline:'Sans sucre ajouté — idéal pour les seniors et la convalescence',
+        desc:'Moulynak est une farine composée de céréales et de légumineuses, formulée sans sucre ajouté. Riche en nutriments essentiels, elle accompagne le bien-être des personnes âgées et de toute personne en quête d\'une alimentation plus naturelle. Facile à préparer en bouillie ou en crêpes.',
+        images:['assets/produits/Moulynak/package.jpg','assets/produits/Moulynak/bouillie moulynak.jpg','assets/produits/Moulynak/crepe moulynak.jpg'],
+        prices:{'100 g':900,'250 g':2000,'400 g':3600,'1 kg':7600},
+        specs:[{k:'Composition',v:'Céréales & légumineuses'},{k:'Sucre ajouté',v:'Aucun'},{k:'Usage',v:'Bouillie, crêpes, pain'},{k:'Conservation',v:'Lieu sec, à l\'abri'},{k:'Origine',v:'Sénégal — 100 % local'},{k:'Profil',v:'Seniors, convalescence'}],
+        similar:['farine','marmite']
+    },
+    farine: {
+        id:'farine', tag:'Naturelle & Locale',
+        name:'Farine de Mil Enrichie',
+        tagline:'Enrichie en vitamines et minéraux — l\'alliée du petit-déjeuner',
+        desc:'Notre Farine de Mil Enrichie est produite à partir de mil local sélectionné, enrichi en vitamines A, B et D ainsi qu\'en fer et zinc. Elle apporte énergie, fibres et protéines végétales pour bien commencer la journée en famille.',
+        images:['assets/produits/Farine de mil enrichie/Farine de mil enrichie.png'],
+        prices:{'250 g':650,'500 g':1250},
+        specs:[{k:'Composition',v:'Mil, vit. A B D, fer, zinc'},{k:'Fibres',v:'Haute teneur'},{k:'Usage',v:'Bouillie, pain, lait fermenté'},{k:'Conservation',v:'Lieu sec, à l\'abri'},{k:'Origine',v:'Sénégal — 100 % local'},{k:'Profil',v:'Famille, enfants, adultes'}],
+        similar:['moulynak','marmite']
+    },
+    marmite: {
+        id:'marmite', tag:'Artisanat sénégalais',
+        name:'Marmite en Terre Cuite',
+        tagline:'Cuisson lente & douce — saveurs authentiques préservées',
+        desc:'Les marmites en terre cuite CYCAS permettent une cuisson douce qui conserve les nutriments et révèle les saveurs. Fabriquées par des artisans sénégalais, elles sont l\'alliance parfaite de la tradition et d\'une cuisine plus saine.',
+        images:['assets/produits/Marmite en terre cuite/marmite en terre cuite.jpg'],
+        prices:{'Petite':8500,'Moyenne':14000,'Grande':20000},
+        specs:[{k:'Matière',v:'Terre cuite naturelle'},{k:'Usage',v:'Feu, gaz'},{k:'Entretien',v:'Laver à la main'},{k:'Avantage',v:'Moins de matières grasses'},{k:'Origine',v:'Artisanat sénégalais'},{k:'Profil',v:'Toute la famille'}],
+        similar:['moulynak','farine']
+    }
+};
+
+let P, sl=0, qty=1, sel=null;
+
+function getItems(){ try{ return JSON.parse(localStorage.getItem('cycas_items')||'[]'); }catch(e){ return []; } }
+function setItems(a){ localStorage.setItem('cycas_items',JSON.stringify(a)); }
+function cartCount(){ return getItems().reduce((a,i)=>a+i.qty,0); }
+
+function init(){
+    const id=new URLSearchParams(location.search).get('p')||'moulynak';
+    P=C[id]||C.moulynak;
+    document.getElementById('page-title').textContent=`CYCAS — ${P.name}`;
+    document.getElementById('d-tag').textContent=P.tag;
+    document.getElementById('d-name').textContent=P.name;
+    document.getElementById('d-tagline').textContent=P.tagline;
+    document.getElementById('d-desc').textContent=P.desc;
+    buildSlider(); buildPills(); buildSpecs(); buildSim(); syncBadge();
+}
+
+function buildSlider(){
+    const inn=document.getElementById('slider-inner');
+    const ths=document.getElementById('thumbs');
+    const lns=document.getElementById('sl-lines');
+    const multi=P.images.length>1;
+    P.images.forEach((src,i)=>{
+        const f=document.createElement('div'); f.className='sl-frame';
+        f.innerHTML=`<img src="${src}" alt="${P.name}">`;
+        inn.appendChild(f);
+        if(multi){
+            const t=document.createElement('div'); t.className='th'+(i===0?' on':'');
+            t.innerHTML=`<img src="${src}" alt="">`; t.onclick=()=>goSl(i); ths.appendChild(t);
+            const l=document.createElement('div'); l.className='sl-line'+(i===0?' on':'');
+            l.onclick=()=>goSl(i); lns.appendChild(l);
+        }
+    });
+    if(!multi) {
+        lns.style.display='none';
+        ths.style.display='none';
+    }
+    let tx=0;
+    inn.parentElement.addEventListener('touchstart',e=>{ tx=e.touches[0].clientX; },{passive:true});
+    inn.parentElement.addEventListener('touchend',e=>{
+        const dx=e.changedTouches[0].clientX-tx;
+        if(Math.abs(dx)>40){ dx<0?goSl(sl+1):goSl(sl-1); }
+    },{passive:true});
+}
+
+function goSl(n){
+    sl=(n+P.images.length)%P.images.length;
+    document.getElementById('slider-inner').style.transform=`translateX(-${sl*100}%)`;
+    document.querySelectorAll('.sl-line').forEach((l,i)=>l.classList.toggle('on',i===sl));
+    document.querySelectorAll('.th').forEach((t,i)=>t.classList.toggle('on',i===sl));
+}
+
+function buildPills(){
+    const w=document.getElementById('pills');
+    Object.keys(P.prices).forEach((s,i)=>{
+        const b=document.createElement('button'); b.className='pill'+(i===0?' on':'');
+        b.textContent=s; b.dataset.s=s; b.onclick=()=>pickSize(s); w.appendChild(b);
+    });
+    pickSize(Object.keys(P.prices)[0]);
+}
+
+function pickSize(s){
+    sel=s;
+    document.querySelectorAll('.pill').forEach(b=>b.classList.toggle('on',b.dataset.s===s));
+    const el=document.getElementById('price-n');
+    el.style.opacity='0';
+    setTimeout(()=>{ el.textContent=P.prices[s].toLocaleString('fr-FR'); el.style.opacity='1'; },120);
+}
+
+function incQ(){ qty++; document.getElementById('q-n').textContent=qty; }
+function decQ(){ if(qty>1){ qty--; document.getElementById('q-n').textContent=qty; } }
+
+function addCart(){
+    const items=getItems();
+    const key=P.id+'_'+sel;
+    const ex=items.find(i=>i.key===key);
+    if(ex){
+        ex.name=P.name;
+        ex.size=sel;
+        ex.price=P.prices[sel];
+        ex.image=P.images[0];
+        ex.qty+=qty;
+    } else{ items.push({key,id:P.id,name:P.name,size:sel,price:P.prices[sel],qty,image:P.images[0]}); }
+    setItems(items); syncBadge(); showToast();
+}
+
+function syncBadge(){
+    const n=cartCount();
+    const fab=document.getElementById('cart-fab');
+    const badge=document.getElementById('cart-fab-badge');
+    badge.textContent=n;
+    if(n>0) fab.classList.add('visible');
+}
+
+function showToast(){
+    const t=document.getElementById('toast');
+    t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),2400);
+    const badge=document.getElementById('cart-fab-badge');
+    badge.classList.remove('bump');
+    void badge.offsetWidth;
+    badge.classList.add('bump');
+}
+
+function buildSpecs(){
+    const g=document.getElementById('specs');
+    P.specs.forEach(({k,v})=>{
+        const r=document.createElement('div'); r.className='spec';
+        r.innerHTML=`<span class="spec-k">${k}</span><span class="spec-v">${v}</span>`;
+        g.appendChild(r);
+    });
+}
+
+function buildSim(){
+    const w=document.getElementById('sim-scroll');
+    P.similar.forEach(id=>{
+        const p=C[id]; if(!p)return;
+        const min=Math.min(...Object.values(p.prices)).toLocaleString('fr-FR');
+        const a=document.createElement('a'); a.className='sim-card'; a.href=`product.html?p=${p.id}`;
+        a.innerHTML=`<div class="sim-img-wrap"><img src="${p.images[0]}" alt="${p.name}"></div><div class="sim-name">${p.name}</div><div class="sim-price">Dès ${min} CFA</div>`;
+        w.appendChild(a);
+    });
+}
+
+init();
+</script>
+</body>
+</html>

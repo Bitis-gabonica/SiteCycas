@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CYCAS — Panier</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+        :root {
+            --cream:   #FDFBF5;
+            --img-bg:  #F0EDE5;
+            --black:   #111111;
+            --green:   #244230;
+            --muted:   #2b2b2b;
+            --muted-light: #525252;
+            --divider: rgba(17,17,17,0.12);
+            --nav-h:   68px;
+        }
+
+        body { font-family:'Manrope',sans-serif; background:var(--cream); color:var(--black); min-height:100vh; }
+
+        /* ── NAVBAR ──────────────────────────────────────────── */
+        .navbar {
+            position: fixed; top:0; left:0; width:100%;
+            height: var(--nav-h); padding: 0 3rem;
+            display: flex; justify-content: space-between; align-items: center;
+            background: var(--cream); z-index: 200;
+            border-bottom: 1px solid var(--divider);
+        }
+        .logo svg { color: var(--black); display: block; }
+        .logo a { display: block; }
+        .nav-links { display: flex; gap: 2rem; align-items: center; }
+        .nav-links a {
+            color: var(--muted); text-decoration: none;
+            font-size: 0.82rem; font-weight: 500; transition: color 0.2s;
+        }
+        .nav-links a:hover, .nav-links a.active { color: var(--green); }
+        .nav-action { display: flex; align-items: center; gap: 1.25rem; }
+        .nav-cart {
+            display: flex; align-items: center; gap: 0.45rem;
+            color: var(--green); text-decoration: none;
+            font-size: 0.72rem; font-weight: 600;
+            letter-spacing: 0.1em; text-transform: uppercase;
+        }
+        .cart-n {
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 17px; height: 17px;
+            background: var(--green); color: #fff;
+            border-radius: 50%; font-size: 0.58rem; font-weight: 700;
+        }
+        .btn-outline {
+            padding: 0.45rem 1.1rem; border: 1px solid rgba(17,17,17,0.15);
+            border-radius: 50px; color: var(--black); text-decoration: none;
+            font-size: 0.78rem; font-weight: 500; transition: all 0.2s;
+        }
+        .btn-outline:hover { background: var(--green); color: #fff; border-color: var(--green); }
+
+        /* ── LAYOUT ──────────────────────────────────────────── */
+        .main {
+            display: grid;
+            grid-template-columns: 1fr 360px;
+            min-height: 100vh;
+            padding-top: var(--nav-h);
+        }
+
+        /* ── LEFT ────────────────────────────────────────────── */
+        .col-items {
+            padding: 5rem 4rem 5rem 2.5rem;
+            border-right: 1px solid var(--divider);
+        }
+
+        .col-label {
+            font-size: 0.65rem; font-weight: 700;
+            letter-spacing: 0.2em; text-transform: uppercase;
+            color: var(--green); margin-bottom: 0.4rem;
+        }
+
+        .col-title {
+            font-size: 2rem; font-weight: 400;
+            letter-spacing: -0.02em; margin-bottom: 2.5rem;
+        }
+
+        .table-head {
+            display: grid;
+            grid-template-columns: 1fr 130px 100px 24px;
+            gap: 1rem;
+            padding-bottom: 0.9rem;
+            border-bottom: 1px solid var(--divider);
+        }
+        .table-head span {
+            font-size: 0.62rem; font-weight: 700;
+            letter-spacing: 0.14em; text-transform: uppercase; color: var(--green);
+        }
+        .th-c { text-align: center; }
+        .th-r { text-align: right; }
+
+        .item {
+            display: grid;
+            grid-template-columns: 64px 1fr 130px 100px 24px;
+            gap: 1.25rem;
+            align-items: center;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid var(--divider);
+        }
+
+        .item-img {
+            width: 64px; height: 64px; border-radius: 10px;
+            background: var(--img-bg); overflow: hidden;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .item-img img { max-width: 80%; max-height: 80%; object-fit: contain; mix-blend-mode: multiply; }
+
+        .item-name { font-size: 0.88rem; font-weight: 500; margin-bottom: 0.2rem; }
+        .item-size { font-size: 0.72rem; color: var(--muted-light); font-weight: 600; }
+
+        .item-qty { display: flex; align-items: center; justify-content: center; gap: 0.9rem; }
+        .iq-btn {
+            width: 22px; height: 22px; border: none; background: transparent;
+            cursor: pointer; font-size: 1rem; color: var(--muted);
+            font-family: 'Manrope',sans-serif; transition: color 0.15s; line-height: 1;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 600;
+        }
+        .iq-btn:hover { color: var(--green); }
+        .iq-n { font-size: 0.85rem; font-weight: 600; min-width: 12px; text-align: center; }
+
+        .item-price { font-size: 0.88rem; font-weight: 500; text-align: right; white-space: nowrap; }
+
+        .item-del {
+            color: var(--muted); cursor: pointer; background: none; border: none;
+            font-family: 'Manrope',sans-serif; display: flex; align-items: center;
+            transition: color 0.15s; padding: 0;
+        }
+        .item-del:hover { color: var(--green); }
+
+        /* Empty */
+        .empty { padding: 5rem 0; display: flex; flex-direction: column; gap: 1.5rem; }
+        .empty p { font-size: 0.88rem; color: var(--muted); font-weight: 500; }
+        .link-shop {
+            font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+            color: var(--green); text-decoration: none;
+            display: inline-flex; align-items: center; gap: 0.4rem; transition: gap 0.2s;
+        }
+        .link-shop:hover { gap: 0.7rem; }
+
+        /* ── RIGHT: SUMMARY ──────────────────────────────────── */
+        .col-sum { padding: 5rem 2.5rem 5rem 3.5rem; display: flex; flex-direction: column; }
+
+        .sum-label {
+            font-size: 0.65rem; font-weight: 700;
+            letter-spacing: 0.2em; text-transform: uppercase;
+            color: var(--green); margin-bottom: 2rem;
+        }
+
+        .sum-row {
+            display: flex; justify-content: space-between; align-items: baseline;
+            padding: 0.85rem 0; border-bottom: 1px solid var(--divider);
+        }
+        .sum-k { font-size: 0.78rem; font-weight: 500; color: var(--muted); }
+        .sum-v { font-size: 0.82rem; font-weight: 700; }
+
+        .sum-total {
+            display: flex; justify-content: space-between; align-items: baseline;
+            padding: 1.5rem 0 2.5rem;
+        }
+        .sum-total-k { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
+        .sum-total-v { font-size: 1.7rem; font-weight: 500; letter-spacing: -0.03em; }
+
+        .btn-checkout {
+            display: flex; align-items: center; justify-content: center;
+            width: 100%; height: 50px; border-radius: 50px;
+            background: var(--green); color: #fff; border: none;
+            font-family: 'Manrope',sans-serif;
+            font-size: 0.68rem; font-weight: 700;
+            letter-spacing: 0.16em; text-transform: uppercase;
+            cursor: pointer; text-decoration: none;
+            transition: background 0.25s;
+        }
+        .btn-checkout:hover { background: #1e3828; }
+        .btn-checkout[disabled] { opacity: 0.4; pointer-events: none; }
+
+        .sum-note {
+            margin-top: 1rem; font-size: 0.72rem;
+            color: var(--muted); font-weight: 500; text-align: center; line-height: 1.6;
+        }
+
+        /* Hamburger */
+        .hamburger {
+            display: none; flex-direction: column; justify-content: center; gap: 5px;
+            background: none; border: none; cursor: pointer; padding: 5px 2px;
+            color: var(--muted); flex-shrink: 0;
+        }
+        .hamburger span {
+            display: block; width: 20px; height: 1.5px;
+            background: currentColor; border-radius: 2px;
+            transition: transform 0.28s ease, opacity 0.28s ease;
+        }
+        .hamburger.is-open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+        .hamburger.is-open span:nth-child(2) { opacity: 0; }
+        .hamburger.is-open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+        @media (max-width: 780px) {
+            .navbar { padding: 0 1.5rem; }
+            .hamburger { display: flex; }
+            .nav-links { display: none; }
+            .nav-action .btn-outline { display: none; }
+            .nav-links.nav-open {
+                display: flex !important; flex-direction: column;
+                position: fixed; top: var(--nav-h); left: 0; width: 100%;
+                background: var(--cream); padding: 0.5rem 1.5rem 1.5rem;
+                z-index: 199; border-bottom: 1px solid var(--divider); gap: 0;
+            }
+            .nav-links.nav-open a {
+                padding: 0.9rem 0; border-bottom: 1px solid var(--divider);
+                font-size: 0.88rem; color: var(--black); text-decoration: none;
+            }
+            .nav-links.nav-open a:last-child { border-bottom: none; }
+            .main { grid-template-columns: 1fr; }
+            .col-items { padding: 3rem 1.5rem; border-right: none; border-bottom: 1px solid var(--divider); }
+            .col-sum { padding: 2.5rem 1.5rem; }
+            .item { grid-template-columns: 54px 1fr auto auto auto; }
+            .table-head { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="logo">
+        <a href="index.html">
+            <svg width="110" height="28" viewBox="0 0 120 30" fill="currentColor">
+                <text x="0" y="22" font-family="'Manrope', sans-serif" font-weight="200" font-size="24" letter-spacing="4">CYCAS</text>
+            </svg>
+        </a>
+    </div>
+    <div class="nav-links">
+        <a href="index.html">Accueil</a>
+        <a href="apropos.html">À propos</a>
+        <a href="nutrition.html">Nutrition</a>
+        <a href="produits.html">Nos produits</a>
+        <a href="impact.html">Impact social</a>
+        <a href="blog.html">Blog / Actualités</a>
+    </div>
+    <div class="nav-action">
+        <a href="panier.html" class="nav-cart">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+            </svg>
+            Panier
+            <span class="cart-n" id="cart-n">0</span>
+        </a>
+        <a href="contact.html" class="btn-outline">Contact</a>
+        <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
+
+<main class="main">
+
+    <div class="col-items">
+        <div class="col-label">Votre panier</div>
+        <div class="col-title" id="col-title">0 article</div>
+        <div id="items-wrap"></div>
+    </div>
+
+    <div class="col-sum">
+        <div class="sum-label">Résumé</div>
+        <div class="sum-row"><span class="sum-k">Sous-total</span><span class="sum-v" id="sum-sub">—</span></div>
+        <div class="sum-row"><span class="sum-k">Livraison</span><span class="sum-v" id="sum-ship">—</span></div>
+        <div class="sum-total">
+            <span class="sum-total-k">Total</span>
+            <span class="sum-total-v" id="sum-total">—</span>
+        </div>
+        <a href="checkout.html" class="btn-checkout" id="btn-co">Passer la commande</a>
+        <p class="sum-note" id="sum-note"></p>
+    </div>
+
+</main>
+
+<script>
+const SHIP=15000;
+const FARINE_PRICES={'250 g':650,'500 g':1250};
+function getItems(){ try{ return normalizeItems(JSON.parse(localStorage.getItem('cycas_items')||'[]')); }catch(e){ return []; } }
+function setItems(a){ localStorage.setItem('cycas_items',JSON.stringify(a)); }
+function fmt(n){ return n.toLocaleString('fr-FR')+' CFA'; }
+
+function normalizeItems(items){
+    let changed=false;
+    const normalized=items.filter(item=>{
+        if(item.id!=='farine') return true;
+        const hasSize=Object.prototype.hasOwnProperty.call(FARINE_PRICES,item.size);
+        if(!hasSize) changed=true;
+        return hasSize;
+    });
+    normalized.forEach(item=>{
+        if(item.id==='farine' && item.price!==FARINE_PRICES[item.size]){
+            item.key='farine_'+item.size;
+            item.price=FARINE_PRICES[item.size];
+            changed=true;
+        }
+    });
+    if(changed) setItems(normalized);
+    return normalized;
+}
+
+function render(){
+    const items=getItems();
+    const wrap=document.getElementById('items-wrap');
+    wrap.innerHTML='';
+
+    const n=items.reduce((a,i)=>a+i.qty,0);
+    document.getElementById('cart-n').textContent=n;
+    document.getElementById('col-title').textContent=
+        n===0?'Panier vide':n===1?'1 article':`${n} articles`;
+
+    const btn=document.getElementById('btn-co');
+
+    if(!items.length){
+        wrap.innerHTML=`<div class="empty">
+            <p>Votre panier est vide.</p>
+            <a href="produits.html" class="link-shop">Découvrir nos produits <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        </div>`;
+        ['sum-sub','sum-ship','sum-total'].forEach(id=>document.getElementById(id).textContent='—');
+        document.getElementById('sum-note').textContent='';
+        btn.setAttribute('disabled','');
+        return;
+    }
+
+    btn.removeAttribute('disabled');
+
+    // Table header
+    const h=document.createElement('div'); h.className='table-head';
+    h.innerHTML='<span style="grid-column:1/3">Produit</span><span class="th-c">Quantité</span><span class="th-r">Prix</span><span></span>';
+    wrap.appendChild(h);
+
+    items.forEach((item,idx)=>{
+        const row=document.createElement('div'); row.className='item';
+        row.innerHTML=`
+            <div class="item-img"><img src="${item.image}" alt="${item.name}"></div>
+            <div>
+                <div class="item-name">${item.name}</div>
+                <div class="item-size">${item.size}</div>
+            </div>
+            <div class="item-qty">
+                <button class="iq-btn" onclick="chg(${idx},-1)">−</button>
+                <span class="iq-n">${item.qty}</span>
+                <button class="iq-btn" onclick="chg(${idx},1)">+</button>
+            </div>
+            <div class="item-price">${fmt(item.price*item.qty)}</div>
+            <button class="item-del" onclick="del(${idx})" aria-label="Supprimer">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+            </button>`;
+        wrap.appendChild(row);
+    });
+
+    const sub=items.reduce((a,i)=>a+i.price*i.qty,0);
+    const ship=sub>=SHIP?0:2500;
+    document.getElementById('sum-sub').textContent=fmt(sub);
+    document.getElementById('sum-ship').textContent=ship===0?'Gratuite':fmt(ship);
+    document.getElementById('sum-total').textContent=fmt(sub+ship);
+    document.getElementById('sum-note').textContent=ship>0
+        ?`Livraison offerte dès ${SHIP.toLocaleString('fr-FR')} CFA d\'achat.`
+        :'Vous bénéficiez de la livraison gratuite.';
+}
+
+function chg(idx,d){ const a=getItems(); a[idx].qty=Math.max(1,a[idx].qty+d); setItems(a); render(); }
+function del(idx){ const a=getItems(); a.splice(idx,1); setItems(a); render(); }
+
+render();
+</script>
+<script src="nav.js"></script>
+</body>
+</html>

@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cycas - Prévention Nutritionnelle</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header class="navbar">
+        <div class="logo">
+            <svg width="120" height="30" viewBox="0 0 120 30" fill="currentColor">
+                <text x="0" y="22" font-family="'Manrope', sans-serif" font-weight="200" font-size="24" letter-spacing="4">CYCAS</text>
+            </svg>
+        </div>
+        <nav class="nav-links">
+            <a href="index.html" class="active">Accueil</a>
+            <a href="apropos.html">À propos</a>
+            <a href="nutrition.html">Nutrition</a>
+            <a href="produits.html">Nos produits</a>
+            <a href="impact.html">Impact social</a>
+            <a href="blog.html">Blog / Actualités</a>
+        </nav>
+        <div class="nav-action">
+            <a href="contact.html" class="btn-outline">Contact</a>
+            <a href="panier.html" class="nav-cart-icon" aria-label="Panier">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+                </svg>
+                <span class="nav-cart-badge" id="cart-badge">0</span>
+            </a>
+            <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <main class="hero">
+        <div class="pattern-watermark pattern-tr"></div>
+        <div class="pattern-watermark pattern-bl"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">La santé commence dans vos assiettes</h1>
+            <a href="apropos.html" class="btn-primary">Découvrir</a>
+        </div>
+    </main>
+
+    <section class="products-section" id="produits">
+        <div class="products-header reveal-on-scroll">
+            <div class="products-header-left">
+                <span class="section-eyebrow">Nos solutions</span>
+                <h2>Nos Produits</h2>
+            </div>
+            <div class="products-header-right">
+                <p>Des formulations pensées pour combler les carences nutritionnelles en Afrique. Des ingrédients locaux, sains et accessibles.</p>
+            </div>
+        </div>
+        <div class="products-grid reveal-on-scroll" style="transition-delay: 0.1s;">
+            <a href="product.html?p=moulynak" class="product-card">
+                <span class="minimal-tag">Produit phare</span>
+                <div class="product-card-image" style="background-image: url('assets/produits/Moulynak/package.jpg'); background-color: #EAEAEA;"></div>
+                <div class="product-card-text">
+                    <span class="product-number">Moulynak</span>
+                    <p>Farine composée naturelle sans sucre ajouté. Idéale pour le bien-être des personnes âgées.</p>
+                </div>
+            </a>
+            <a href="product.html?p=farine" class="product-card">
+                <div class="product-card-image" style="background-image: url('assets/produits/Farine de mil enrichie/Farine de mil enrichie.png'); background-color: #EAEAEA;"></div>
+                <div class="product-card-text">
+                    <span class="product-number">Farine de Mil enrichie</span>
+                    <p>Naturelle, locale et enrichie en vitamines. L'alliée parfaite de vos petits-déjeuners.</p>
+                </div>
+            </a>
+            <a href="product.html?p=marmite" class="product-card">
+                <div class="product-card-image" style="background-image: url('assets/produits/Marmite en terre cuite/marmite en terre cuite.jpg'); background-color: #EAEAEA;"></div>
+                <div class="product-card-text">
+                    <span class="product-number">Marmites en terre cuite</span>
+                    <p>Ustensiles traditionnels pour une cuisson douce. Retrouvez le goût authentique du fait-maison.</p>
+                </div>
+            </a>
+        </div>
+        
+        <div class="products-action reveal-on-scroll">
+            <a href="produits.html" class="btn-primary-outline">Voir tous nos produits</a>
+        </div>
+    </section>
+
+    <section class="problem-section">
+        <div class="pattern-watermark pattern-cr"></div>
+        <div class="problem-container">
+            <div class="problem-left">
+                <h2>La nutrition en Afrique,<br>un défi urgent</h2>
+                <p>Ces réalités sont évitables. Une alimentation mieux encadrée, adaptée et accessible change tout,
+                    c'est le combat de CYCAS.</p>
+            </div>
+            <div class="problem-right">
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.2">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="9" cy="7" r="4"></circle>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                        </svg>
+                    </div>
+                    <span class="stat-number">42%</span>
+                    <div class="stat-text-group">
+                        <span class="stat-category">Enfants de moins de 5 ans</span>
+                        <span class="stat-desc">souffrent de retard de croissance lié à la malnutrition en Afrique
+                            subsaharienne</span>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.2">
+                            <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                        </svg>
+                    </div>
+                    <span class="stat-number">1 <span class="text-sm">sur</span> 3</span>
+                    <div class="stat-text-group">
+                        <span class="stat-category">Personnes âgées</span>
+                        <span class="stat-desc">présente des carences nutritionnelles sévères non diagnostiquées</span>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.2">
+                            <path
+                                d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                            </path>
+                        </svg>
+                    </div>
+                    <span class="stat-number">60%</span>
+                    <div class="stat-text-group">
+                        <span class="stat-category">Femmes enceintes</span>
+                        <span class="stat-desc">sont anémiées faute d'un apport en fer et en acide folique
+                            suffisant</span>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.2">
+                            <path
+                                d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z">
+                            </path>
+                            <line x1="12" y1="9" x2="12" y2="13"></line>
+                            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                        </svg>
+                    </div>
+                    <span class="stat-number">2x <span class="text-sm">plus</span></span>
+                    <div class="stat-text-group">
+                        <span class="stat-category">Adultes en milieu urbain</span>
+                        <span class="stat-desc">risque de maladies chroniques (diabète, hypertension) lié aux mauvaises
+                            habitudes alimentaires</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="vision-section">
+        <div class="pattern-watermark pattern-tl"></div>
+        <div class="vision-header reveal-on-scroll">
+            <div class="vision-intro">
+                <span class="section-eyebrow">Née d'un constat simple</span>
+                <h2>En Afrique, mieux se nourrir ne devrait pas être un luxe</h2>
+                <p>CYCAS est une marque sénégalaise de nutrition préventive fondée par le Dr Maimouna Diop Ly,
+                    convaincue que l'alimentation est le levier de santé le plus puissant — et le plus sous-estimé.</p>
+            </div>
+        </div>
+
+        <div class="vision-cards">
+            <div class="vision-card reveal-on-scroll" style="transition-delay: 0.1s;">
+                <div class="vision-icon anim-sway">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z">
+                        </path>
+                        <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"></path>
+                    </svg>
+                </div>
+                <h3>Un besoin réel,<br>une réponse locale</h3>
+                <p>Face à l'augmentation des maladies liées à la nutrition et aux habitudes alimentaires qui se
+                    dégradent, CYCAS est née pour proposer une alternative : des solutions nutritionnelles formulées à
+                    partir d'ingrédients locaux, accessibles et pensées pour les familles africaines.</p>
+            </div>
+
+            <div class="vision-card reveal-on-scroll" style="transition-delay: 0.2s;">
+                <div class="vision-icon anim-pulse-icon">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <circle cx="12" cy="12" r="6"></circle>
+                        <circle cx="12" cy="12" r="2"></circle>
+                    </svg>
+                </div>
+                <h3>Une approche fondée<br>sur la science</h3>
+                <p>Chaque produit, chaque conseil, chaque programme CYCAS repose sur une expertise nutritionnelle
+                    rigoureuse. Notre objectif : rendre la science de la nutrition utile au quotidien — pas réservée aux
+                    spécialistes.</p>
+            </div>
+
+            <div class="vision-card reveal-on-scroll" style="transition-delay: 0.3s;">
+                <div class="vision-icon anim-spin-slow">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="8" cy="12" r="5"></circle>
+                        <circle cx="16" cy="12" r="5"></circle>
+                    </svg>
+                </div>
+                <h3>Un accompagnement<br>sur le long terme</h3>
+                <p>CYCAS ne vend pas juste des produits. Nous accompagnons les familles à travers l'éducation
+                    nutritionnelle, des recettes adaptées et un suivi accessible — pour que de meilleures habitudes
+                    s'installent durablement.</p>
+            </div>
+        </div>
+
+        <div class="vision-cta reveal-on-scroll" style="transition-delay: 0.4s;">
+            <a href="#" class="btn-green">Découvrir notre histoire &rarr;</a>
+        </div>
+    </section>
+
+    <section class="ceo-section">
+        <div class="ceo-top reveal-on-scroll">
+            <div class="ceo-image-wrapper">
+                <div class="ceo-image-bg"></div>
+                <div class="ceo-image-placeholder"></div>
+            </div>
+            <div class="ceo-top-text">
+                <span class="section-eyebrow">Fondatrice & Spécialiste en Santé Publique et Nutrition</span>
+                <div class="ceo-quote">
+                    <span class="quote-mark">“</span>
+                    <blockquote>
+                        L’alimentation est la première médecine. En Afrique, nous avons toutes les ressources pour bien nous nourrir — il manquait juste les bonnes solutions.
+                    </blockquote>
+                </div>
+                <div class="ceo-name-group">
+                    <h3>Dr Maimouna Diop Ly</h3>
+                    <span class="ceo-role">Docteure en Santé Publique et Nutrition — Fondatrice de CYCAS</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="ceo-bottom reveal-on-scroll" style="transition-delay: 0.1s;">
+            <div class="ceo-message">
+                <div class="title-with-dot">
+                    <div class="pulse-dot"></div>
+                    <h4>Le mot de la fondatrice</h4>
+                </div>
+                <div class="ceo-message-text">
+                    <p>CYCAS est née d’une conviction personnelle et professionnelle. Après des années à observer les conséquences des carences nutritionnelles sur les familles africaines, j’ai compris qu’il ne suffisait pas de soigner. Il fallait prévenir. Il fallait éduquer. Il fallait proposer des solutions concrètes, accessibles et ancrées dans notre réalité.</p>
+                    <p>C’est pourquoi CYCAS ne se contente pas de vendre des produits. Nous construisons une approche globale de la nutrition préventive : des formulations à base d’ingrédients locaux, un accompagnement éducatif et une présence de proximité auprès des familles. Parce qu’une famille bien nourrie, c’est une famille qui peut se battre pour son avenir.</p>
+                </div>
+            </div>
+
+            <div class="ceo-roadmap">
+                <div class="title-with-dot">
+                    <div class="pulse-dot transparent-dot"></div>
+                    <h4>Son parcours</h4>
+                </div>
+                <div class="ceo-roadmap-items">
+                    <div class="roadmap-item">
+                        <div class="roadmap-icon">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                        </div>
+                        <div class="roadmap-content">
+                            <span class="roadmap-title">Formation en Sciences de la Nutrition</span>
+                            <span class="roadmap-desc">Université Pierre et Marie Curie, Paris VI</span>
+                        </div>
+                    </div>
+                    <div class="roadmap-item">
+                        <div class="roadmap-icon">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                        </div>
+                        <div class="roadmap-content">
+                            <span class="roadmap-title">Spécialiste en Santé Publique et Nutrition</span>
+                            <span class="roadmap-desc">Expertise internationale</span>
+                        </div>
+                    </div>
+                    <div class="roadmap-item">
+                        <div class="roadmap-icon">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                        </div>
+                        <div class="roadmap-content">
+                            <span class="roadmap-title">Experte en politiques de santé</span>
+                            <span class="roadmap-desc">Banque Africaine de Développement</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="split-impact-section" id="impact">
+        <div class="impact-half impact-left-side">
+            <div class="impact-half-content reveal-on-scroll">
+                <span class="section-eyebrow" style="color: rgba(255,255,255,0.6);">Notre Impact</span>
+                <h2 style="color: #ffffff;">Un engagement au-delà de la nutrition</h2>
+                <p class="lead-text" style="color: rgba(255,255,255,0.8);">CYCAS s’engage dans la valorisation des producteurs locaux, la promotion d’une alimentation durable et la sensibilisation des communautés aux enjeux nutritionnels. À travers ses activités, l’entreprise contribue à améliorer la santé des populations, à soutenir les familles vulnérables et à encourager une meilleure utilisation des ressources alimentaires locales.</p>
+            </div>
+        </div>
+        
+        <div class="impact-half impact-right-side">
+            <div class="impact-half-content reveal-on-scroll" style="transition-delay: 0.2s;">
+                <div class="impact-block">
+                    <h3>Impact social au Sénégal</h3>
+                    <p>CYCAS participe à la transformation des produits locaux en solutions nutritionnelles accessibles, adaptées aux besoins des enfants, femmes enceintes, allaitantes et personnes fragiles. Son action s’inscrit dans une dynamique de santé préventive, d’éducation et de développement communautaire.</p>
+                </div>
+                <div class="impact-separator"></div>
+                <div class="impact-block">
+                    <h3>Impact pour les femmes</h3>
+                    <p>CYCAS valorise les productrices, soutient leur activité économique et favorise leur autonomisation via l'intégration des ressources locales. Elle contribue à la santé des mères, reliant ainsi nutrition, inclusion et empowerment féminin.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="frieze-section">
+        <div class="frieze-header text-center reveal-on-scroll">
+            <h2>4 axes d’impact</h2>
+        </div>
+        <div class="frieze-container reveal-on-scroll" style="transition-delay: 0.1s;">
+            <div class="frieze-line"></div>
+            <div class="frieze-track">
+                
+                <!-- Axis 1 -->
+                <div class="frieze-node">
+                    <div class="frieze-dot"></div>
+                    <div class="frieze-content-top">
+                        <div class="frieze-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                        </div>
+                    </div>
+                    <div class="frieze-content-bottom">
+                        <h4>Soutien aux producteurs</h4>
+                        <div class="frieze-number">01</div>
+                    </div>
+                </div>
+
+                <!-- Axis 2 -->
+                <div class="frieze-node">
+                    <div class="frieze-dot"></div>
+                    <div class="frieze-content-top">
+                        <h4>Ressources africaines</h4>
+                        <div class="frieze-number">02</div>
+                    </div>
+                    <div class="frieze-content-bottom">
+                        <div class="frieze-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.5"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Axis 3 -->
+                <div class="frieze-node">
+                    <div class="frieze-dot"></div>
+                    <div class="frieze-content-top">
+                        <div class="frieze-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.5"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                        </div>
+                    </div>
+                    <div class="frieze-content-bottom">
+                        <h4>Sensibilisation nutritionnelle</h4>
+                        <div class="frieze-number">03</div>
+                    </div>
+                </div>
+
+                <!-- Axis 4 -->
+                <div class="frieze-node">
+                    <div class="frieze-dot"></div>
+                    <div class="frieze-content-top">
+                        <h4>Familles vulnérables</h4>
+                        <div class="frieze-number">04</div>
+                    </div>
+                    <div class="frieze-content-bottom">
+                        <div class="frieze-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- TÉMOIGNAGES SECTION -->
+    <section class="testimonials-section">
+        <div class="testimonials-header text-center reveal-on-scroll">
+            <span class="section-eyebrow">Témoignages</span>
+            <h2>Ce que disent les familles</h2>
+        </div>
+        
+        <div class="testimonials-grid reveal-on-scroll" style="transition-delay: 0.1s;">
+            <!-- Testimonial 1 -->
+            <div class="testimonial-card">
+                <div class="quote-icon">
+                    <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+                </div>
+                <p class="testimonial-text">"La farine enrichie a complètement changé les petits-déjeuners de la famille. Mes enfants l'adorent et je suis rassurée de leur donner un produit 100% naturel et local."</p>
+                <div class="testimonial-author">
+                    <div class="author-photo" style="background-color: #EAEAEA;"></div>
+                    <div class="author-info">
+                        <h4>Awa N.</h4>
+                        <span>Maman de 2 enfants — Dakar</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Testimonial 2 -->
+            <div class="testimonial-card">
+                <div class="quote-icon">
+                    <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+                </div>
+                <p class="testimonial-text">"Moulynak est parfait pour mon père. Sans sucre ajouté, il le digère très bien. C'est exactement ce qu'il nous fallait pour préserver sa vitalité."</p>
+                <div class="testimonial-author">
+                    <div class="author-photo" style="background-color: #EAEAEA;"></div>
+                    <div class="author-info">
+                        <h4>Fatou S.</h4>
+                        <span>Pour son père (Senior) — Thiès</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Testimonial 3 -->
+            <div class="testimonial-card">
+                <div class="quote-icon">
+                    <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+                </div>
+                <p class="testimonial-text">"En tant que professionnel de santé, je recommande souvent les produits CYCAS. Ils répondent à un besoin réel avec des ingrédients sains de chez nous."</p>
+                <div class="testimonial-author">
+                    <div class="author-photo" style="background-color: #EAEAEA;"></div>
+                    <div class="author-info">
+                        <h4>Dr. Ousmane D.</h4>
+                        <span>Professionnel de santé — Saint-Louis</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER / CONTACTS -->
+    <footer class="site-footer-new" id="contact">
+        <div class="footer-container">
+            <h2 class="huge-title reveal-on-scroll">Contacts</h2>
+            
+            <div class="contact-grid reveal-on-scroll" style="transition-delay: 0.1s;">
+                <!-- Column 1: Address -->
+                <div class="contact-col">
+                    <h4>Adresse</h4>
+                    <p class="contact-detail">Jamm Space<br>Dakar, Sénégal</p>
+                    <a href="contact.html" class="btn-map-outline">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                        Voir la page contact
+                    </a>
+                </div>
+
+                <!-- Column 2: Phones / Email -->
+                <div class="contact-col">
+                    <h4>Contacts</h4>
+                    <div class="contact-item">
+                        <span class="contact-sub">Service Client</span>
+                        <p class="contact-detail">+221 00 000 00 00</p>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-sub">Email</span>
+                        <p class="contact-detail">contact@cycas.sn</p>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-sub">Réseaux sociaux</span>
+                        <div class="social-links-new">
+                            <a href="#">Instagram</a>
+                            <a href="#">LinkedIn</a>
+                            <a href="#">Facebook</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Column 3: Schedule -->
+                <div class="contact-col">
+                    <h4>Horaires</h4>
+                    <div class="schedule-item">
+                        <span class="contact-sub">lun-ven:</span>
+                        <div class="schedule-time">
+                            <span>09:00</span>
+                            <div class="schedule-line"></div>
+                            <span>18:00</span>
+                        </div>
+                    </div>
+                    <div class="schedule-item">
+                        <span class="contact-sub">samedi:</span>
+                        <div class="schedule-time">
+                            <span>10:00</span>
+                            <div class="schedule-line"></div>
+                            <span>14:00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Map Embed -->
+            <div class="contact-map reveal-on-scroll" style="transition-delay: 0.2s;">
+                <iframe src="https://maps.google.com/maps?q=Jamm%20Space,%20Dakar,%20Senegal&t=&z=15&ie=UTF8&iwloc=&output=embed" width="100%" height="250" style="border:0; border-radius: 12px; margin-top: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.05);" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+
+            <div class="footer-bottom-new">
+                <div class="footer-logo">CYCAS</div>
+                <div class="footer-nav-new">
+                    <a href="apropos.html">À propos</a>
+                    <a href="produits.html">Produits</a>
+                    <a href="impact.html">Impact</a>
+                    <a href="nutrition.html">Recettes</a>
+                </div>
+                <p>&copy; 2025 CYCAS Nutrition. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Reveal elements on scroll
+        document.addEventListener('DOMContentLoaded', () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+
+            document.querySelectorAll('.reveal-on-scroll').forEach((el) => {
+                observer.observe(el);
+            });
+        });
+    </script>
+    <script src="nav.js"></script>
+</body>
+
+</html>

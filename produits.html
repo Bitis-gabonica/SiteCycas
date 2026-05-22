@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nos Produits - CYCAS</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body class="page-produits">
+    <header class="nutrition-hero-banner bg-nutrition reveal-on-scroll">
+        <nav class="navbar navbar-light">
+            <div class="logo">
+                <svg width="120" height="30" viewBox="0 0 120 30" fill="currentColor">
+                    <text x="0" y="22" font-family="'Manrope', sans-serif" font-weight="200" font-size="24" letter-spacing="4">CYCAS</text>
+                </svg>
+            </div>
+            <div class="nav-links">
+                <a href="index.html">Accueil</a>
+                <a href="apropos.html">À propos</a>
+                <a href="nutrition.html">Nutrition</a>
+                <a href="produits.html" class="active">Nos produits</a>
+                <a href="impact.html">Impact social</a>
+                <a href="blog.html">Blog / Actualités</a>
+            </div>
+            <div class="nav-action">
+                <a href="contact.html" class="btn-outline">Contact</a>
+                <a href="panier.html" class="nav-cart-icon" aria-label="Panier">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+                    </svg>
+                    <span class="nav-cart-badge" id="cart-badge">0</span>
+                </a>
+                <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </nav>
+
+        <div class="hero-banner-inner">
+            <span class="eyebrow-text">NOS SOLUTIONS</span>
+            <h1>La boutique CYCAS</h1>
+            <p>Des formulations pensées pour combler les carences nutritionnelles en Afrique. Des ingrédients locaux, sains et accessibles.</p>
+        </div>
+    </header>
+
+    <main style="padding: 6rem 0; background-color: #ffffff;">
+        <div class="products-grid reveal-on-scroll">
+            <a href="product.html?p=moulynak" class="product-card">
+                <span class="minimal-tag">Produit phare</span>
+                <div class="product-card-image" style="background-image: url('assets/produits/Moulynak/package.jpg'); background-color: #EAEAEA;"></div>
+                <div class="product-card-text">
+                    <span class="product-number">Moulynak</span>
+                    <p>Farine composée naturelle sans sucre ajouté. Idéale pour le bien-être des personnes âgées et la convalescence.</p>
+                </div>
+            </a>
+            <a href="product.html?p=farine" class="product-card">
+                <div class="product-card-image" style="background-image: url('assets/produits/Farine de mil enrichie/Farine de mil enrichie.png'); background-color: #EAEAEA;"></div>
+                <div class="product-card-text">
+                    <span class="product-number">Farine de Mil enrichie</span>
+                    <p>Naturelle, locale et enrichie en vitamines et minéraux. L'alliée parfaite de vos petits-déjeuners.</p>
+                </div>
+            </a>
+            <a href="product.html?p=marmite" class="product-card">
+                <div class="product-card-image" style="background-image: url('assets/produits/Marmite en terre cuite/marmite en terre cuite.jpg'); background-color: #EAEAEA;"></div>
+                <div class="product-card-text">
+                    <span class="product-number">Marmites en terre cuite</span>
+                    <p>Ustensiles traditionnels pour une cuisson douce. Retrouvez le goût authentique du fait-maison sans excès d'huile.</p>
+                </div>
+            </a>
+        </div>
+    </main>
+
+    <!-- Global CTA Section -->
+    <section class="global-cta-section reveal-on-scroll">
+        <div class="global-cta-content text-center">
+            <h2>Commandez dès maintenant</h2>
+            <p>Tous nos produits sont disponibles en livraison ou en point de retrait. Contactez-nous pour passer commande ou trouver le revendeur le plus proche.</p>
+            <a href="index.html#contact" class="btn-green-solid" style="margin-top: 1rem;">Nous contacter</a>
+        </div>
+    </section>
+
+    <!-- FOOTER / CONTACTS -->
+    <footer class="site-footer-new" id="contact">
+        <div class="footer-container">
+            <h2 class="huge-title reveal-on-scroll">Contacts</h2>
+            
+            <div class="contact-grid reveal-on-scroll" style="transition-delay: 0.1s;">
+                <div class="contact-col">
+                    <h4>Adresse</h4>
+                    <p class="contact-detail">Jamm Space<br>Dakar, Sénégal</p>
+                    <a href="contact.html" class="btn-map-outline">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                        Voir la page contact
+                    </a>
+                </div>
+                <div class="contact-col">
+                    <h4>Contacts</h4>
+                    <div class="contact-item">
+                        <span class="contact-sub">Service Client</span>
+                        <p class="contact-detail">+221 00 000 00 00</p>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-sub">Email</span>
+                        <p class="contact-detail">contact@cycas.sn</p>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-sub">Réseaux sociaux</span>
+                        <div class="social-links-new">
+                            <a href="#">Instagram</a>
+                            <a href="#">LinkedIn</a>
+                            <a href="#">Facebook</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-col">
+                    <h4>Horaires</h4>
+                    <div class="schedule-item">
+                        <span class="contact-sub">lun-ven:</span>
+                        <div class="schedule-time">
+                            <span>09:00</span>
+                            <div class="schedule-line"></div>
+                            <span>18:00</span>
+                        </div>
+                    </div>
+                    <div class="schedule-item">
+                        <span class="contact-sub">samedi:</span>
+                        <div class="schedule-time">
+                            <span>10:00</span>
+                            <div class="schedule-line"></div>
+                            <span>14:00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-map reveal-on-scroll" style="transition-delay: 0.2s;">
+                <iframe src="https://maps.google.com/maps?q=Jamm%20Space,%20Dakar,%20Senegal&t=&z=15&ie=UTF8&iwloc=&output=embed" width="100%" height="250" style="border:0; border-radius: 12px; margin-top: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.05);" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+
+            <div class="footer-bottom-new">
+                <div class="footer-logo">CYCAS</div>
+                <div class="footer-nav-new">
+                    <a href="apropos.html">À propos</a>
+                    <a href="produits.html">Produits</a>
+                    <a href="impact.html">Impact</a>
+                    <a href="nutrition.html">Recettes</a>
+                </div>
+                <p>&copy; 2025 CYCAS Nutrition. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
+        });
+    </script>
+    <script src="nav.js"></script>
+</body>
+</html>

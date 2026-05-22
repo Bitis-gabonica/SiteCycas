@@ -1,0 +1,227 @@
+[
+  {
+    "id": 1,
+    "profil": "Général",
+    "moment": "Général",
+    "titre": "L’assiette équilibrée sénégalaise",
+    "description": "Composez une assiette équilibrée en associant une base de céréales locales (mil, fonio, riz complet), une source de protéines (poisson, œufs, niébé, arachide) et beaucoup de légumes. Ajoutez un fruit comme dessert (mangue, papaye, pastèque) pour compléter le repas. Réduisez les excès de sucre, de sel et d’huile et privilégiez les produits locaux pour des repas sains et abordables.",
+    "produit_CYCAS": "Farine de Mil enrichie, Moulynak (selon les besoins)",
+    "tags": "Équilibre; Céréales locales; Protéines; Légumes; Fruits"
+  },
+  {
+    "id": 2,
+    "profil": "Général",
+    "moment": "Hygiène",
+    "titre": "Sécurité et hygiène en cuisine",
+    "description": "Avant de cuisiner, lavez-vous toujours les mains, maintenez la cuisine propre et coupez les ongles. Utilisez une poubelle fermée, lavez le matériel avant usage et ne mélangez pas les viandes crues avec les autres aliments. Lavez soigneusement les fruits et légumes avec de l’eau propre, désinfectez ceux qui seront consommés crus, et cuisez suffisamment les viandes et poissons pour éliminer les microbes.",
+    "produit_CYCAS": "Marmites en terre cuite",
+    "tags": "Hygiène; Sécurité alimentaire; Manipulation; Cuisson"
+  },
+  {
+    "id": 3,
+    "profil": "Général",
+    "moment": "Préparation",
+    "titre": "Préserver les nutriments et réduire l’huile",
+    "description": "Pour conserver les vitamines et minéraux des légumes, lavez-les rapidement dans une passoire, évitez de les tremper longtemps et ne les lavez pas après découpe. Cuisez-les à la vapeur ou ajoutez-les en fin de cuisson pour une cuisson al dente. Ne surchauffez jamais l’huile ; elle ne doit pas fumer. Utilisez des Marmites en terre cuite pour une cuisson douce avec moins de matières grasses.",
+    "produit_CYCAS": "Marmites en terre cuite",
+    "tags": "Nutriments; Cuisson douce; Vapeur; Réduction huile"
+  },
+  {
+    "id": 4,
+    "profil": "Général",
+    "moment": "Hydratation",
+    "titre": "Boire sainement",
+    "description": "Buvez suffisamment d’eau tout au long de la journée et remplacez les boissons sucrées et sodas par des jus locaux peu sucrés (bouye, bissap, ditakh) ou de l’eau aromatisée au citron. Une bonne hydratation soutient la digestion et aide à réduire l’excès de sucre.",
+    "produit_CYCAS": "Aucun",
+    "tags": "Hydratation; Jus naturels; Réduction sucre"
+  },
+  {
+    "id": 5,
+    "profil": "Général",
+    "moment": "Légumineuses",
+    "titre": "Intégrer les légumineuses locales",
+    "description": "Ajoutez régulièrement des légumineuses comme le niébé, les lentilles et les haricots dans vos repas. Elles apportent des protéines végétales, du fer, du zinc et des fibres qui contribuent à la satiété et complètent les protéines animales. Préparez une salade de niébé, un ndambé ou remplacez une partie de la viande par des haricots.",
+    "produit_CYCAS": "Moulynak",
+    "tags": "Légumineuses; Protéines végétales; Fer; Fibres"
+  },
+  {
+    "id": 6,
+    "profil": "Enfants",
+    "moment": "Petit-déjeuner",
+    "titre": "Bouillie de mil enrichie pour bien démarrer la journée",
+    "description": "Préparez une bouillie de mil enrichie avec la Farine de Mil CYCAS et du lait. Ajoutez un fruit frais (mangue, papaye, orange) en dessert pour apporter des vitamines. Évitez de trop sucrer la bouillie ; laissez les enfants s’habituer au goût naturel des céréales locales. Cette bouillie apporte énergie et nutriments pour la croissance.",
+    "produit_CYCAS": "Farine de Mil enrichie",
+    "tags": "Enfants; Petit-déjeuner; Bouillie; Vitamines"
+  },
+  {
+    "id": 7,
+    "profil": "Enfants",
+    "moment": "Petit-déjeuner",
+    "titre": "Utiliser Moulynak pour un petit-déjeuner complet",
+    "description": "Moulynak, farine composée de céréales et de légumineuses, constitue un petit-déjeuner idéal pour les enfants. Préparez-la en bouillie avec un peu de lait sans sucre ajouté et servez-la avec une banane ou un morceau de pastèque. Moulynak apporte des protéines végétales, de l’énergie et des minéraux essentiels.",
+    "produit_CYCAS": "Moulynak",
+    "tags": "Enfants; Petit-déjeuner; Moulynak; Protéines"
+  },
+  {
+    "id": 8,
+    "profil": "Enfants",
+    "moment": "Déjeuner",
+    "titre": "Déjeuner équilibré pour enfants",
+    "description": "Pour le repas de midi, servez un plat composé de céréales locales (riz complet, fonio, mil) avec beaucoup de légumes et une source de protéines comme du poisson, du poulet ou du niébé. Réduisez l’huile et le sel et utilisez une Marmite pour une cuisson douce. Terminez par un fruit de saison pour compléter le repas.",
+    "produit_CYCAS": "Marmites en terre cuite",
+    "tags": "Enfants; Déjeuner; Céréales; Légumes; Protéines"
+  },
+  {
+    "id": 9,
+    "profil": "Enfants",
+    "moment": "Collation",
+    "titre": "Snack sain pour l’après-midi",
+    "description": "Privilégiez les snacks naturels comme les fruits coupés (papaye, mangue, pastèque), la salade de niébé ou quelques arachides grillées au lieu des biscuits et boissons sucrées. Ces collations fournissent vitamines, fibres et énergie sans excès de sucre.",
+    "produit_CYCAS": "Aucun",
+    "tags": "Enfants; Collation; Fruits; Niébé"
+  },
+  {
+    "id": 10,
+    "profil": "Enfants",
+    "moment": "Dîner",
+    "titre": "Dîner léger pour enfants",
+    "description": "Le soir, optez pour une soupe légère à base de légumes (gombo, carotte, chou) et de céréales comme le fonio ou le mil. Ajoutez un peu de poisson ou de niébé pour l’apport en protéines. Évitez les repas trop gras et trop salés avant le coucher. Servez tiède avec de l’eau ou une tisane légère.",
+    "produit_CYCAS": "Marmites en terre cuite",
+    "tags": "Enfants; Dîner; Soupe; Légumes; Protéines"
+  },
+  {
+    "id": 11,
+    "profil": "Femmes enceintes",
+    "moment": "Petit-déjeuner",
+    "titre": "Bouillie de mil enrichie pour la grossesse",
+    "description": "Préparez une bouillie de mil avec la Farine de Mil enrichie CYCAS, du lait ou du lait caillé et ajoutez une poignée de niébé cuit ou du fromage frais pour renforcer l’apport en protéines et en fer. Ajoutez un fruit frais riche en vitamine C comme l’orange pour améliorer l’absorption du fer. Limitez le sucre ajouté.",
+    "produit_CYCAS": "Farine de Mil enrichie",
+    "tags": "Femmes enceintes; Petit-déjeuner; Fer; Vitamine C"
+  },
+  {
+    "id": 12,
+    "profil": "Femmes enceintes",
+    "moment": "Déjeuner",
+    "titre": "Déjeuner riche en nutriments pour la grossesse",
+    "description": "Le midi, composez un plat complet avec du riz complet ou du fonio, beaucoup de légumes verts (gombo, feuilles de moringa, navet) et une portion de poisson ou de viande maigre. Ajoutez des légumineuses comme le niébé pour renforcer l’apport en fer et en protéines. Utilisez les Marmites pour une cuisson douce qui conserve les nutriments.",
+    "produit_CYCAS": "Marmites en terre cuite",
+    "tags": "Femmes enceintes; Déjeuner; Fer; Protéines; Légumes"
+  },
+  {
+    "id": 13,
+    "profil": "Femmes enceintes",
+    "moment": "Collation",
+    "titre": "Collation nutritive pendant la grossesse",
+    "description": "Entre les repas, privilégiez des collations légères comme une salade de niébé, un yaourt nature, une poignée d’arachides ou un fruit (mangue, papaye). Ces collations apportent fer, calcium et acides gras essentiels sans excès de sucre.",
+    "produit_CYCAS": "Moulynak",
+    "tags": "Femmes enceintes; Collation; Niébé; Calcium"
+  },
+  {
+    "id": 14,
+    "profil": "Femmes enceintes",
+    "moment": "Dîner",
+    "titre": "Soupe douce pour la fin de journée",
+    "description": "Le soir, préparez une soupe légère à base de légumes variés (carotte, chou, gombo) et de céréales comme le fonio ou le mil. Ajoutez des morceaux de poisson ou de poulet bien cuits pour les protéines. Évitez les repas très gras et salés. Servez avec un fruit pour un apport supplémentaire en vitamines.",
+    "produit_CYCAS": "Marmites en terre cuite",
+    "tags": "Femmes enceintes; Dîner; Soupe; Légumes; Protéines"
+  },
+  {
+    "id": 15,
+    "profil": "Femmes enceintes",
+    "moment": "Conseil général",
+    "titre": "Fer et vitamines pendant la grossesse",
+    "description": "Consommez chaque jour des aliments riches en fer (niébé, lentilles, viande maigre, poisson), en calcium (lait caillé, lait, feuilles vertes), et en folates (feuilles de moringa, bouye). Associez-les avec des fruits riches en vitamine C pour optimiser l’absorption du fer. Consultez toujours un professionnel de santé pour adapter ces conseils à votre situation.",
+    "produit_CYCAS": "Moulynak, Farine de Mil enrichie",
+    "tags": "Femmes enceintes; Fer; Calcium; Folate; Vitamine C"
+  },
+  {
+    "id": 16,
+    "profil": "Personnes âgées",
+    "moment": "Petit-déjeuner",
+    "titre": "Moulynak et bouillies douces pour bien commencer la journée",
+    "description": "Les personnes âgées ont besoin d’une alimentation facile à digérer et riche en nutriments. Préparez une bouillie douce avec Moulynak ou la Farine de Mil enrichie en ajoutant du lait ou du lait caillé. Limitez le sucre et accompagnez d’un fruit mûr comme la banane ou la papaye pour les fibres et les vitamines.",
+    "produit_CYCAS": "Moulynak, Farine de Mil enrichie",
+    "tags": "Personnes âgées; Petit-déjeuner; Bouillie; Digestible"
+  },
+  {
+    "id": 17,
+    "profil": "Personnes âgées",
+    "moment": "Déjeuner",
+    "titre": "Repas de midi facile à mâcher et riche en protéines",
+    "description": "Proposez un plat à base de riz complet ou de fonio bien cuit, des légumes tendres (courge, carotte, courgette) et du poisson ou du poulet bien cuit. Ajoutez un peu de niébé pour renforcer l’apport en protéines et en fibres. Utilisez les Marmites en terre cuite pour une cuisson lente et douce qui garde la texture tendre.",
+    "produit_CYCAS": "Marmites en terre cuite",
+    "tags": "Personnes âgées; Déjeuner; Tendreté; Protéines"
+  },
+  {
+    "id": 18,
+    "profil": "Personnes âgées",
+    "moment": "Collation",
+    "titre": "Collations digestes pour les seniors",
+    "description": "Entre les repas, proposez des fruits mûrs (papaye, mangue, banane) ou un yaourt nature. Ces collations apportent des vitamines, du calcium et des fibres sans surcharger l’estomac. Une petite poignée d’arachides grillées peut fournir des acides gras insaturés bénéfiques.",
+    "produit_CYCAS": "Aucun",
+    "tags": "Personnes âgées; Collation; Fruits mûrs; Calcium"
+  },
+  {
+    "id": 19,
+    "profil": "Personnes âgées",
+    "moment": "Dîner",
+    "titre": "Soupe légère pour le soir",
+    "description": "Pour le dîner, privilégiez une soupe ou un bouillon à base de légumes bien cuits (gombo, carotte, chou) et de petites quantités de céréales comme le mil ou le fonio. Ajoutez un peu de poisson émietté pour les protéines. Servez tiède et évitez les repas lourds pour faciliter le sommeil.",
+    "produit_CYCAS": "Marmites en terre cuite",
+    "tags": "Personnes âgées; Dîner; Soupe; Léger"
+  },
+  {
+    "id": 20,
+    "profil": "Personnes âgées",
+    "moment": "Conseil général",
+    "titre": "Adapter l’alimentation au vieillissement",
+    "description": "Fractionnez les repas si l’appétit est faible : petit-déjeuner, repas léger, collation et dîner. Assurez-vous d’une bonne hydratation en buvant de l’eau régulièrement. Limitez le sel, le sucre et les aliments frits. Préférez les bouillies et les soupes préparées avec Moulynak ou la Farine de Mil enrichie pour une texture douce et nutritive.",
+    "produit_CYCAS": "Moulynak, Farine de Mil enrichie",
+    "tags": "Personnes âgées; Adaptation; Hydratation; Fractionnement"
+  },
+  {
+    "id": 21,
+    "profil": "Adultes et jeunes",
+    "moment": "Petit-déjeuner",
+    "titre": "Petit-déjeuner équilibré pour adultes et jeunes",
+    "description": "Pour démarrer la journée, préparez une bouillie de mil ou de fonio avec la Farine de Mil enrichie et accompagnez-la d’un œuf ou de quelques arachides pour les protéines. Ajoutez un fruit frais pour les vitamines. Limitez le sucre et évitez les boissons sucrées.",
+    "produit_CYCAS": "Farine de Mil enrichie",
+    "tags": "Adultes; Jeunes; Petit-déjeuner; Protéines"
+  },
+  {
+    "id": 22,
+    "profil": "Adultes et jeunes",
+    "moment": "Déjeuner",
+    "titre": "Déjeuner nourrissant pour l’après-midi",
+    "description": "Au repas de midi, optez pour un plat composé de riz complet ou de fonio, accompagné de légumes variés et d’une source de protéines comme le poisson, le poulet ou le niébé. Réduisez l’huile et le sel, et utilisez des Marmites en terre cuite pour une cuisson douce qui conserve les saveurs. Terminez par un fruit.",
+    "produit_CYCAS": "Marmites en terre cuite",
+    "tags": "Adultes; Jeunes; Déjeuner; Céréales; Protéines"
+  },
+  {
+    "id": 23,
+    "profil": "Adultes et jeunes",
+    "moment": "Collation",
+    "titre": "Snacks énergétiques et sains",
+    "description": "Pour tenir entre les repas, choisissez des collations naturelles : fruits, salade de niébé, quelques arachides, ou un verre de bouye peu sucré. Ces snacks apportent de l’énergie sans les excès de sucre et de matières grasses des produits ultra-transformés.",
+    "produit_CYCAS": "Aucun",
+    "tags": "Adultes; Jeunes; Collation; Énergie"
+  },
+  {
+    "id": 24,
+    "profil": "Adultes et jeunes",
+    "moment": "Dîner",
+    "titre": "Repas du soir léger et équilibré",
+    "description": "Au dîner, choisissez un plat léger à base de soupe de légumes, de fonio ou de mil accompagné d’un peu de poisson ou de niébé. Évitez les repas très riches en huile et en friture. Servez-le tôt pour favoriser une bonne digestion avant le sommeil.",
+    "produit_CYCAS": "Marmites en terre cuite",
+    "tags": "Adultes; Jeunes; Dîner; Léger"
+  },
+  {
+    "id": 25,
+    "profil": "Adultes et jeunes",
+    "moment": "Conseil général",
+    "titre": "Mieux manger au quotidien",
+    "description": "Réduisez les portions de riz et l’huile lorsque les plats sont très gras. Ajoutez davantage de légumes dans les recettes traditionnelles comme le ceebujën, le yassa et le thiou. Buvez de l’eau au lieu de boissons sucrées. Favorisez les céréales locales et les légumineuses pour un meilleur équilibre nutritionnel.",
+    "produit_CYCAS": "Marmites en terre cuite, Farine de Mil enrichie",
+    "tags": "Adultes; Jeunes; Équilibre; Réduction huile; Légumes"
+  }
+]
