@@ -74,12 +74,26 @@ document.addEventListener('DOMContentLoaded', function () {
         checkScroll();
     }
 
+    // ── Safe SessionStorage Helpers ────────────────────
+    function safeGetSession(key) {
+        try {
+            return sessionStorage.getItem(key);
+        } catch (e) {
+            return null;
+        }
+    }
+    function safeSetSession(key, val) {
+        try {
+            sessionStorage.setItem(key, val);
+        } catch (e) {}
+    }
+
     // ── Page loader fade out ───────────────────────────
     var loader = document.getElementById('site-loader');
     if (loader) {
         // Tagline typewriter letter-by-letter reveal
         var tagline = document.getElementById('loader-tagline');
-        if (tagline && !sessionStorage.getItem('cycas_loader_shown')) {
+        if (tagline && !safeGetSession('cycas_loader_shown')) {
             var text = tagline.textContent.trim();
             tagline.innerHTML = '';
             for (var i = 0; i < text.length; i++) {
@@ -90,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 } else {
                     span.textContent = char;
                 }
-                span.style.animationDelay = (i * 0.04) + 's';
+                span.style.animationDelay = (i * 0.02) + 's';
                 tagline.appendChild(span);
             }
         }
@@ -98,42 +112,60 @@ document.addEventListener('DOMContentLoaded', function () {
         var hideLoader = function() {
             setTimeout(function() {
                 loader.classList.add('fade-out');
-                sessionStorage.setItem('cycas_loader_shown', 'true');
-            }, 5200); // 5.2s show time
+                safeSetSession('cycas_loader_shown', 'true');
+            }, 2200); // 2.2s fixed show time for premium fluid feel
         };
-        if (document.readyState === 'complete') {
-            hideLoader();
-        } else {
-            window.addEventListener('load', hideLoader);
-        }
+        
+        hideLoader(); // Run immediately, do not block on window resources (e.g. large images)
     }
 
-    // ── Hamburger ──────────────────────────────────────
+    // ── Hamburger & Mobile Nav Inject ──────────────────
     var btn = document.getElementById('hamburger');
     if (btn) {
         var navContainer = btn.closest('.navbar');
         var links = navContainer ? navContainer.querySelector('.nav-links') : null;
 
         if (links) {
+            // Dynamically inject Contact link into mobile navigation list if not already present
+            var hasContact = false;
+            links.querySelectorAll('a').forEach(function (a) {
+                if (a.getAttribute('href') === 'contact.html') {
+                    hasContact = true;
+                }
+            });
+            if (!hasContact) {
+                var contactLink = document.createElement('a');
+                contactLink.href = 'contact.html';
+                contactLink.className = 'nav-mobile-contact';
+                contactLink.textContent = 'Contact';
+                links.appendChild(contactLink);
+            }
+
             btn.addEventListener('click', function () {
                 var open = links.classList.toggle('nav-open');
                 btn.classList.toggle('is-open', open);
                 btn.setAttribute('aria-expanded', String(open));
+                document.body.style.overflow = open ? 'hidden' : '';
             });
 
+            // Add click listeners to all links (including the newly injected contact)
             links.querySelectorAll('a').forEach(function (a) {
                 a.addEventListener('click', function () {
                     links.classList.remove('nav-open');
                     btn.classList.remove('is-open');
                     btn.setAttribute('aria-expanded', 'false');
+                    document.body.style.overflow = '';
                 });
             });
 
             document.addEventListener('click', function (e) {
                 if (navContainer && !navContainer.contains(e.target)) {
-                    links.classList.remove('nav-open');
-                    btn.classList.remove('is-open');
-                    btn.setAttribute('aria-expanded', 'false');
+                    if (links.classList.contains('nav-open')) {
+                        links.classList.remove('nav-open');
+                        btn.classList.remove('is-open');
+                        btn.setAttribute('aria-expanded', 'false');
+                        document.body.style.overflow = '';
+                    }
                 }
             });
         }

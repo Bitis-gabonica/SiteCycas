@@ -14,9 +14,11 @@
 <body>
     <div id="site-loader" class="site-loader">
         <script>
-            if (sessionStorage.getItem('cycas_loader_shown')) {
-                document.currentScript.parentElement.style.display = 'none';
-            }
+            try {
+                if (sessionStorage.getItem('cycas_loader_shown')) {
+                    document.currentScript.parentElement.style.display = 'none';
+                }
+            } catch (e) {}
         </script>
         <div class="loader-content">
             <img src="assets/Logo cycas original.png" alt="CYCAS" class="loader-logo">

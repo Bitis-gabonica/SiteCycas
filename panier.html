@@ -205,20 +205,80 @@
 
         @media (max-width: 780px) {
             .navbar { padding: 0 1.5rem; }
+            .logo, .nav-action { position: relative; z-index: 201; }
             .hamburger { display: flex; }
-            .nav-links { display: none; }
             .nav-action .btn-outline { display: none; }
+            
+            /* Premium full screen drawer */
+            .nav-links {
+                display: flex !important;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: flex-start;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                background: rgba(253, 251, 245, 0.85);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                padding: 7rem 2rem 2rem 2rem;
+                z-index: 199;
+                gap: 0.5rem;
+                transform: translateY(-100%);
+                opacity: 0;
+                pointer-events: none;
+                transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+            }
             .nav-links.nav-open {
-                display: flex !important; flex-direction: column;
-                position: fixed; top: var(--nav-h); left: 0; width: 100%;
-                background: var(--cream); padding: 0.5rem 1.5rem 1.5rem;
-                z-index: 199; border-bottom: 1px solid var(--divider); gap: 0;
+                transform: translateY(0);
+                opacity: 1;
+                pointer-events: auto;
+            }
+            .nav-links a {
+                font-size: 1.5rem;
+                font-weight: 300;
+                width: 100%;
+                padding: 0.9rem 0;
+                border-bottom: 1px solid var(--divider);
+                color: var(--black);
+                opacity: 0;
+                transform: translateY(20px);
+                transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease;
             }
             .nav-links.nav-open a {
-                padding: 0.9rem 0; border-bottom: 1px solid var(--divider);
-                font-size: 0.88rem; color: var(--black); text-decoration: none;
+                opacity: 1;
+                transform: translateY(0);
             }
-            .nav-links.nav-open a:last-child { border-bottom: none; }
+            .nav-links a:last-child {
+                border-bottom: none;
+            }
+            
+            /* Staggered entrance delays */
+            .nav-links.nav-open a:nth-child(1) { transition-delay: 0.08s; }
+            .nav-links.nav-open a:nth-child(2) { transition-delay: 0.12s; }
+            .nav-links.nav-open a:nth-child(3) { transition-delay: 0.16s; }
+            .nav-links.nav-open a:nth-child(4) { transition-delay: 0.20s; }
+            .nav-links.nav-open a:nth-child(5) { transition-delay: 0.24s; }
+            .nav-links.nav-open a:nth-child(6) { transition-delay: 0.28s; }
+            .nav-links.nav-open a:nth-child(7) { transition-delay: 0.32s; }
+
+            /* Mobile Contact Link Button Style */
+            .nav-links a.nav-mobile-contact {
+                display: flex !important;
+                justify-content: center;
+                align-items: center;
+                margin-top: 1.5rem;
+                padding: 0.9rem 2rem;
+                border: 1px solid rgba(36, 66, 48, 0.25);
+                border-radius: 50px;
+                font-size: 1.1rem;
+                font-weight: 400;
+                background: rgba(36, 66, 48, 0.05);
+                color: var(--green);
+            }
+
             .main { grid-template-columns: 1fr; }
             .col-items { padding: 3rem 1.5rem; border-right: none; border-bottom: 1px solid var(--divider); }
             .col-sum { padding: 2.5rem 1.5rem; }
@@ -347,9 +407,11 @@
 <body>
     <div id="site-loader" class="site-loader">
         <script>
-            if (sessionStorage.getItem('cycas_loader_shown')) {
-                document.currentScript.parentElement.style.display = 'none';
-            }
+            try {
+                if (sessionStorage.getItem('cycas_loader_shown')) {
+                    document.currentScript.parentElement.style.display = 'none';
+                }
+            } catch (e) {}
         </script>
         <div class="loader-content">
             <img src="assets/Logo cycas original.png" alt="CYCAS" class="loader-logo">
