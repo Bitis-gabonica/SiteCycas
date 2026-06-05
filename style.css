@@ -2227,36 +2227,57 @@ body::after {
 
     /* Navbar */
     .navbar {
-        padding: 1rem 1.5rem;
-        background-color: rgba(6, 6, 6, 0.75) !important;
-        backdrop-filter: blur(20px) !important;
-        -webkit-backdrop-filter: blur(20px) !important;
-        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.25) !important;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    }
-    .navbar.navbar-light {
-        background-color: rgba(253, 251, 245, 0.85) !important;
-        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03) !important;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    }
-    .navbar.scrolled {
-        background-color: rgba(6, 6, 6, 0.75) !important;
+        padding: 1rem 1.5rem !important;
+        background-color: rgba(13, 15, 14, 0.92) !important;
         backdrop-filter: blur(20px) !important;
         -webkit-backdrop-filter: blur(20px) !important;
         box-shadow: 0 4px 30px rgba(0, 0, 0, 0.25) !important;
         border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
     }
-    .navbar.navbar-light.scrolled {
-        background-color: rgba(253, 251, 245, 0.85) !important;
-        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03) !important;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
+    .navbar.scrolled {
+        padding: 0.8rem 1.5rem !important;
+        background-color: rgba(13, 15, 14, 0.95) !important;
+        backdrop-filter: blur(20px) !important;
+        -webkit-backdrop-filter: blur(20px) !important;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3) !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
     }
-    .hamburger { display: flex; }
+    .navbar.navbar-light,
+    .navbar.navbar-light.scrolled {
+        background-color: rgba(13, 15, 14, 0.92) !important;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.25) !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+    }
+    .hamburger {
+        display: flex !important;
+        color: rgba(255, 255, 255, 0.9) !important;
+    }
+    .hamburger span {
+        background-color: rgba(255, 255, 255, 0.9) !important;
+    }
     .logo, .nav-action {
         position: relative;
         z-index: 101;
+        display: flex !important;
+        align-items: center !important;
     }
-    .nav-action .btn-outline { display: none; }
+    .logo-img {
+        height: 56px !important;
+        width: auto !important;
+    }
+    .nav-action {
+        gap: 1.2rem !important;
+    }
+    .nav-action .btn-outline { display: none !important; }
+    .nav-cart-icon {
+        display: flex !important;
+        color: #ffffff !important;
+        opacity: 0.95 !important;
+        filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3)) !important;
+    }
+    .nav-cart-icon svg {
+        stroke: #ffffff !important;
+    }
 
     /* Premium mobile full screen drawer */
     .nav-links {

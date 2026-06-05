@@ -34,7 +34,10 @@ document.addEventListener('DOMContentLoaded', function () {
             // Determine if navbar is over a dark or light section
             var overLight = isDefaultLight;
 
-            if (!isDefaultLight) {
+            if (window.innerWidth <= 768) {
+                // On mobile, keep it dark always to ensure visibility and contrast
+                overLight = false;
+            } else if (!isDefaultLight) {
                 // On index page, check overlap with light sections
                 var lightSections = document.querySelectorAll('.products-section, .vision-section, .ceo-section, .split-impact-section, .frieze-section, .testimonials-section');
                 lightSections.forEach(function(sec) {
