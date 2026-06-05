@@ -58,7 +58,7 @@ body::after {
 
 /* Navbar */
 .navbar {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -66,7 +66,48 @@ body::after {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    z-index: 10;
+    z-index: 100;
+    background-color: transparent;
+    transition: background-color 0.3s ease, backdrop-filter 0.3s ease, -webkit-backdrop-filter 0.3s ease, box-shadow 0.3s ease, padding 0.3s ease;
+}
+
+/* Scrolled Navbar State */
+.navbar.scrolled {
+    background-color: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    box-shadow: none !important;
+    padding: 1rem 3rem;
+}
+
+/* Scrolled Navbar Light State */
+.navbar-light.navbar.scrolled {
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
+
+/* Logo Image */
+.logo-img {
+    height: 80px;
+    width: auto;
+    display: block;
+    transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+.logo-img:hover {
+    transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+    .navbar.scrolled {
+        padding: 0.8rem 1.5rem;
+    }
+    .logo-img {
+        height: 56px;
+    }
+    .nav-links.nav-open {
+        top: 100% !important; /* Positions mobile menu relative to navbar bottom */
+    }
 }
 
 .logo svg {
@@ -2332,4 +2373,127 @@ body::after {
     .huge-title { font-size: 2.2rem; }
     .testimonials-header h2 { font-size: 1.8rem; }
     .impact-left-side h2 { font-size: 1.9rem; }
+}
+
+/* ============================================================
+   ENTRANCE LOADER SCREEN
+   ============================================================ */
+.site-loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: #FDFBF5;
+    background-image: url('assets/illustrations/apropos_hero_bg.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.8s cubic-bezier(0.165, 0.84, 0.44, 1), visibility 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.site-loader.fade-out {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.loader-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.loader-logo {
+    height: 200px;
+    width: auto;
+    max-width: 80vw;
+    object-fit: contain;
+    animation: pulseLogo 2.5s ease-in-out infinite;
+}
+
+/* Minimalist thin progress bar */
+.loader-progress-bar {
+    width: 280px;
+    height: 2px;
+    background-color: rgba(36, 66, 48, 0.15);
+    border-radius: 2px;
+    overflow: hidden;
+    position: relative;
+    margin-top: 1rem;
+}
+
+.loader-progress-fill {
+    width: 0%;
+    height: 100%;
+    background-color: #6E473B; /* Marron */
+    border-radius: 2px;
+    animation: fillProgress 5.0s cubic-bezier(0.1, 0.6, 0.1, 1.0) forwards;
+}
+
+.loader-tagline {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 300;
+    font-size: clamp(0.9rem, 2.0vw, 1.5rem);
+    color: #244230;
+    letter-spacing: -0.01em;
+    text-align: center;
+    max-width: 98%;
+    margin-top: 1.5rem;
+    white-space: nowrap;
+    overflow: visible;
+}
+
+.loader-tagline span {
+    display: inline-block;
+    opacity: 0;
+    animation: revealLetter 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.loader-tagline .brand-name {
+    font-weight: 500;
+    color: inherit;
+}
+
+@media (max-width: 768px) {
+    .loader-tagline {
+        font-size: clamp(0.6rem, 2.4vw, 1.1rem);
+    }
+    .loader-logo {
+        height: 140px;
+    }
+}
+
+@keyframes fillProgress {
+    0% { width: 0%; }
+    100% { width: 100%; }
+}
+
+@keyframes revealLetter {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulseLogo {
+    0%, 100% {
+        transform: scale(1);
+        filter: drop-shadow(0 4px 6px rgba(0,0,0,0.03));
+    }
+    50% {
+        transform: scale(1.03);
+        filter: drop-shadow(0 12px 20px rgba(36,66,48,0.12));
+    }
 }

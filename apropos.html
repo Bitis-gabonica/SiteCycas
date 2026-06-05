@@ -8,12 +8,27 @@
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600&display=swap" rel="stylesheet">
 </head>
 <body class="page-apropos">
+    <div id="site-loader" class="site-loader">
+        <script>
+            if (sessionStorage.getItem('cycas_loader_shown')) {
+                document.currentScript.parentElement.style.display = 'none';
+            }
+        </script>
+        <div class="loader-content">
+            <img src="assets/Logo cycas original.png" alt="CYCAS" class="loader-logo">
+            <div class="loader-progress-bar">
+                <div class="loader-progress-fill"></div>
+            </div>
+            <p class="loader-tagline" id="loader-tagline">Bienvenue chez CYCAS, là où la nutrition locale prend soin de votre santé</p>
+        </div>
+    </div>
+
     <header class="nutrition-hero-banner bg-apropos reveal-on-scroll">
         <nav class="navbar navbar-light">
             <div class="logo">
-                <svg width="120" height="30" viewBox="0 0 120 30" fill="currentColor">
-                    <text x="0" y="22" font-family="'Manrope', sans-serif" font-weight="200" font-size="24" letter-spacing="4">CYCAS</text>
-                </svg>
+                <a href="index.html" aria-label="Accueil">
+                    <img src="assets/Logo cycas original.png" alt="CYCAS" class="logo-img">
+                </a>
             </div>
             <div class="nav-links">
                 <a href="index.html">Accueil</a>
