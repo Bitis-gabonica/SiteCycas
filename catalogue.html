@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CYCAS - Catalogue Produits</title>
+    <!-- style.css du site volontairement non inclus : le catalogue est 100% auto-suffisant (styles inline).
+         L'inclure chargeait un fond global assets/bg.png (3,5 Mo), invisible ici car masque par les diapos
+         opaques, mais qui alourdissait la page web ET faisait gonfler le PDF (rasterisation pleine page). -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Prechargement des images : tout se charge d'un coup, plus de pop-in au scroll -->
+    <link rel="preload" as="image" href="assets/web/bg.jpg">
+    <link rel="preload" as="image" href="assets/web/illustrations/apropos_hero_bg.jpg">
+    <link rel="preload" as="image" href="assets/web/illustrations/Culture.jpg">
+    <link rel="preload" as="image" href="assets/web/produits/Moulynak/package.jpg">
+    <link rel="preload" as="image" href="assets/web/produits/Moulynak/Moulynak%20sans%20arachide.jpg">
+    <link rel="preload" as="image" href="assets/web/produits/Farine%20de%20mil%20enrichie/Farine%20de%20mil%20enrichie.jpg">
+    <link rel="preload" as="image" href="assets/web/produits/GraineDecitrouille.jpg">
+    <link rel="preload" as="image" href="assets/web/produits/Compote%20de%20banane.jpg">
+    <link rel="preload" as="image" href="assets/web/Logo%20cycas%20original.png">
+    
+    <style>
+        /* Premium Minimalist Split Slide CSS */
+        :root {
+            --brand-green: #244230;
+            --brand-brown: #6E473B;
+            --brand-light: #FDFBF5;
+            --brand-cream: #F5F2EB;
+            --text-dark: #111111;
+            --text-gray: #555555;
+            --slide-height: 100vh;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+            font-family: 'Nunito', sans-serif;
+            color: var(--text-dark);
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .catalog-container {
+            width: 100%;
+            height: 100vh;
+            scroll-snap-type: y mandatory;
+            overflow-y: scroll;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* Base Slide - 50/50 split screen */
+        .slide {
+            width: 100%;
+            height: var(--slide-height);
+            scroll-snap-align: start;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            position: relative;
+            page-break-after: always;
+            box-sizing: border-box;
+            background-color: #ffffff;
+            overflow: hidden;
+        }
+
+        /* Slide 1 - Cover (Full screen background, no split) */
+        .slide.slide-cover {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), url('assets/web/bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        /* Overlay baked into the background gradient above — avoids a full-page lossless raster in the PDF */
+
+        /* Textured Background for Slide 2 and 8 */
+        .slide.textured-bg {
+            background-image: url('assets/web/illustrations/apropos_hero_bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        /* Left side: Product image (takes full left panel) */
+        .slide-left-image {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            background-color: var(--brand-cream);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .slide-left-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+        
+        /* Studio packshot container style */
+        .slide-left-image.studio-shot {
+            background-color: var(--brand-cream);
+            padding: 4rem;
+            box-sizing: border-box;
+        }
+        .slide-left-image.studio-shot img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            mix-blend-mode: multiply;
+        }
+
+        /* Right side: Product information (clean, flat, minimalist typography) */
+        .slide-right-info {
+            width: 100%;
+            height: 100%;
+            background-image: url('assets/web/illustrations/apropos_hero_bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 3.5rem 4.5rem;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        /* Transparent background option for Slide 2 and 8 */
+        .slide-right-info.transparent-bg,
+        .brief-left-content.transparent-bg {
+            background-color: transparent;
+        }
+
+        /* Typography */
+        .slide-eyebrow {
+            font-size: 0.95rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--brand-brown);
+            margin-bottom: 1rem;
+        }
+        .slide-title {
+            font-size: clamp(2.5rem, 4vw, 3.8rem);
+            font-weight: 500; /* Bolder weight */
+            color: var(--brand-green);
+            line-height: 1.15;
+            margin: 0 0 1.5rem 0;
+            letter-spacing: -0.02em;
+        }
+        .slide-divider {
+            width: 40px;
+            height: 1px;
+            background-color: var(--brand-brown);
+            margin-bottom: 2rem;
+        }
+        .slide-text {
+            font-size: 1.25rem;
+            line-height: 1.6;
+            color: #222222; /* Darker color for high readability */
+            font-weight: 500; /* Bolder weight */
+        }
+        .slide-text p {
+            margin-bottom: 1.5rem;
+        }
+        .slide-text p:last-child {
+            margin-bottom: 0;
+        }
+        .slide-text strong {
+            color: #000000;
+            font-weight: 800; /* Extrabold for high contrast */
+        }
+        .slide-text ul {
+            list-style: none;
+            padding: 0;
+            margin: 1.5rem 0;
+        }
+        .slide-text li {
+            margin-bottom: 0.8rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+        .slide-text li::before {
+            content: '—';
+            position: absolute;
+            left: 0;
+            color: var(--brand-brown);
+            font-weight: bold;
+        }
+
+        /* Cover Slide Specific Typography */
+        .cover-content {
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2.5rem;
+            padding: 2rem;
+            max-width: 900px;
+        }
+        
+        /* Colored Logo in a White Circle container */
+        .cover-logo-wrapper {
+            position: absolute;
+            top: 4rem;
+            left: 6rem;
+            width: 110px;
+            height: 110px;
+            background-color: #ffffff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            z-index: 2;
+            box-sizing: border-box;
+        }
+        .cover-logo-wrapper img {
+            width: 82%;
+            height: 82%;
+            object-fit: contain;
+            display: block;
+            margin: 0;
+            padding: 0;
+            position: relative;
+            top: 2px; /* optical adjustment for text curves */
+        }
+        
+        .cover-content h1 {
+            font-size: clamp(3.2rem, 5vw, 4.8rem);
+            font-weight: 400; /* Bolder for visibility */
+            color: #ffffff;
+            line-height: 1.15;
+            margin: 0;
+            letter-spacing: -0.02em;
+        }
+        .cover-content h2 {
+            font-size: clamp(1.5rem, 2.5vw, 2.2rem);
+            font-weight: 500; /* Bolder for visibility */
+            color: #ffffff;
+            opacity: 0.95;
+            margin: 0;
+        }
+        .cover-content .contacts-row {
+            margin-top: 2rem;
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 500; /* Bolder for visibility */
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        /* Brief Slide Specific Layout */
+        .brief-left-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 3.5rem 4.5rem;
+            z-index: 1;
+        }
+        .brief-right-image {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4rem;
+            z-index: 1;
+        }
+        .brief-right-image img {
+            max-width: 100%;
+            max-height: 85%;
+            object-fit: cover;
+            border-radius: 16px;
+            box-shadow: 0 15px 35px rgba(36, 66, 48, 0.12);
+        }
+
+        /* Slide 8: Commandes and Contacts split */
+        .contact-left-branding {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 3.5rem 4.5rem;
+            box-sizing: border-box;
+            background-color: transparent;
+            z-index: 1;
+        }
+        .contact-left-branding img {
+            width: 180px;
+            object-fit: contain;
+            margin-bottom: 2rem;
+        }
+        .contact-left-branding h2 {
+            font-size: 3.5rem;
+            font-weight: 300;
+            color: var(--brand-green);
+            line-height: 1.1;
+            margin: 0 0 1.5rem 0;
+        }
+        .contact-left-branding p {
+            font-size: 1.3rem;
+            line-height: 1.6;
+            color: #222222;
+            font-weight: 500;
+        }
+        .contact-right-minimal {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 3.5rem 4.5rem;
+            box-sizing: border-box;
+            gap: 2.5rem;
+            z-index: 1;
+        }
+        .contact-group {
+            display: flex;
+            flex-direction: column;
+        }
+        .contact-group h3 {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--brand-brown);
+            margin: 0 0 0.5rem 0;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        .contact-group p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: #222222;
+            margin: 0;
+            font-weight: 500;
+        }
+        .contact-group p strong,
+        .contact-left-branding p strong {
+            color: #000000;
+            font-weight: 800;
+        }
+
+        /* Slide Right-Edge Rotated Watermark */
+        .vertical-watermark {
+            position: absolute;
+            right: 2.5rem;
+            top: 50%;
+            transform: translateY(-50%) rotate(90deg);
+            transform-origin: right center;
+            font-size: 0.85rem;
+            letter-spacing: 0.25em;
+            color: rgba(36, 66, 48, 0.3);
+            font-weight: 500;
+            text-transform: uppercase;
+            z-index: 10;
+        }
+        
+        /* Dark vertical watermark for cover slide */
+        .slide-cover .vertical-watermark {
+            color: rgba(255, 255, 255, 0.3);
+        }
+        
+        .page-num {
+            position: absolute;
+            bottom: 2rem;
+            right: 6rem;
+            font-size: 0.95rem;
+            color: rgba(0, 0, 0, 0.25);
+            font-weight: 600;
+            z-index: 10;
+        }
+        .slide-cover .page-num {
+            color: rgba(255, 255, 255, 0.4);
+        }
+        
+        /* Large Visible Logo on other slides */
+        .slide-logo-mini {
+            position: absolute;
+            top: 3rem;
+            left: 6rem;
+            height: 65px; /* Much larger as requested */
+            object-fit: contain;
+            z-index: 10;
+        }
+
+        /* Screen only: continuous scroll through the slides (no slide-by-slide snap) */
+        @media screen {
+            body, html {
+                height: auto;
+                overflow-x: hidden;
+                overflow-y: auto;
+            }
+            .catalog-container {
+                height: auto;
+                overflow: visible;
+                scroll-snap-type: none;
+            }
+            .slide {
+                scroll-snap-align: none;
+            }
+        }
+
+        /* Print Specific Styling */
+        @media print {
+            @page {
+                size: landscape;
+                margin: 0;
+            }
+            body, html {
+                overflow: visible !important;
+                height: auto !important;
+                position: static !important;
+            }
+            .catalog-container {
+                overflow: visible !important;
+                height: auto !important;
+                position: static !important;
+                scroll-snap-type: none !important;
+            }
+            .slide {
+                height: 100vh !important;
+                overflow: hidden !important;
+                page-break-after: always !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+                scroll-snap-align: none !important;
+                position: relative !important;
+            }
+            .slide:last-of-type {
+                page-break-after: auto !important;
+            }
+
+            /* PDF-only layout: lift the logo clear of the text and fit content to the page */
+            .slide-right-info {
+                padding: 5.5rem 4.5rem 3rem 4.5rem;
+            }
+            .slide-logo-mini {
+                top: 1.6rem;
+                left: 4.5rem;
+                height: 40px;
+            }
+            .slide-eyebrow {
+                margin-bottom: 0.7rem;
+            }
+            .slide-title {
+                font-size: 2.2rem;
+                margin-bottom: 1rem;
+            }
+            .slide-divider {
+                margin-bottom: 1.2rem;
+            }
+            .slide-text {
+                font-size: 0.92rem;
+                line-height: 1.5;
+                font-weight: 500;
+                color: #111111;
+            }
+            .slide-text p {
+                margin-bottom: 0.75rem;
+            }
+            .slide-text ul {
+                margin: 0.9rem 0;
+            }
+            .slide-text li {
+                margin-bottom: 0.5rem;
+            }
+            .brief-left-content,
+            .contact-left-branding,
+            .contact-right-minimal {
+                padding: 4rem;
+            }
+            .contact-right-minimal {
+                gap: 1.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="catalog-container">
+
+        <!-- Slide 1: Couverture (Home Page Hero background: assets/web/bg.jpg) -->
+        <section class="slide slide-cover">
+            <!-- Colored Logo in a White Circle container -->
+            <div class="cover-logo-wrapper">
+                <img src="assets/web/Logo cycas original.png" alt="CYCAS Logo">
+            </div>
+            <div class="cover-content">
+                <h1>La santé commence dans vos assiettes</h1>
+                <h2>Catalogue de Produits CYCAS</h2>
+                <div class="contacts-row">
+                    <span><a href="tel:+221786335050">+221 78 633 50 50</a> / <a href="tel:+221766222830">+221 76 622 28 30</a></span>
+                    <span>•</span>
+                    <span><a href="mailto:contact@cycas.sn">contact@cycas.sn</a></span>
+                    <span>•</span>
+                    <span><a href="https://site-cycas.vercel.app" target="_blank">site-cycas.vercel.app</a></span>
+                </div>
+            </div>
+            <div class="vertical-watermark">CYCAS NUTRITION • 2026</div>
+            <div class="page-num">1</div>
+        </section>
+
+        <!-- Slide 2: Notre vision (Textured background, Culture image on right) -->
+        <section class="slide textured-bg">
+            <div class="brief-left-content transparent-bg">
+                <div class="slide-eyebrow">Notre Vision</div>
+                <h2 class="slide-title">La nutrition locale au service de votre santé</h2>
+                <div class="slide-divider"></div>
+                <div class="slide-text">
+                    <p><strong>CYCAS</strong> est une entreprise sénégalaise innovante créée en 2023.</p>
+                    <p>Elle évolue dans la nutrition, la transformation agroalimentaire et la santé publique.</p>
+                    <p>Elle valorise les produits locaux pour proposer des aliments sains, accessibles et adaptés aux besoins des populations.</p>
+                </div>
+            </div>
+            <div class="brief-right-image">
+                <img src="assets/web/illustrations/Culture.jpg" alt="Culture">
+            </div>
+            <div class="vertical-watermark">CYCAS NUTRITION</div>
+            <div class="page-num">2</div>
+        </section>
+
+         <!-- Slide 3: LES COMPOSANTES DE MOULYNAK (NEW) -->
+        <section class="slide">
+            <div class="slide-left-image studio-shot" style="background-color: #F4F7F5;">
+                <img src="assets/web/illustrations/moulynak_composants.png" alt="Les Composantes de Moulynak" style="border-radius: 12px; max-width: 90%; max-height: 90%; object-fit: contain; box-shadow: 0 10px 25px rgba(36,66,48,0.08);">
+            </div>
+            <div class="slide-right-info">
+                <img src="assets/web/Logo cycas original.png" alt="CYCAS Logo" class="slide-logo-mini">
+                <div class="slide-eyebrow">Composition</div>
+                <h2 class="slide-title">Les Composantes<br>de Moulynak</h2>
+                <div class="slide-divider"></div>
+                <div class="slide-text" style="font-size: 1.15rem; line-height: 1.5;">
+                    <p>MOULYNAK repose sur une combinaison d’ingrédients aux bénéfices complémentaires :</p>
+                    <ul style="margin: 1rem 0;">
+                        <li style="margin-bottom: 0.75rem;"><strong>MIL :</strong> Céréale riche en fibres, vitamines B et minéraux. Elle fournit une énergie durable, aide à stabiliser la glycémie et maintient la vitalité.</li>
+                        <li style="margin-bottom: 0.75rem;"><strong>FONIO :</strong> Céréale locale digeste et riche en fer, zinc et magnésium. Facile à assimiler, elle convient aux seniors à la digestion lente.</li>
+                        <li style="margin-bottom: 0.75rem;"><strong>PAIN DE SINGE (fruit du baobab) :</strong> Riche en vitamine C, antioxydants et fibres. Renforce l’immunité et facilite l’absorption du fer.</li>
+                        <li style="margin-bottom: 0.75rem;"><strong>NIÉBÉ :</strong> Source de protéines végétales, indispensables au maintien de la masse musculaire, de la force et de l’autonomie.</li>
+                        <li style="margin-bottom: 0.75rem;"><strong>ARACHIDE :</strong> Riche en graisses saines, protéines et magnésium. Soutient la santé cardiovasculaire et prévient les carences.</li>
+                    </ul>
+                </div>
+                <div class="vertical-watermark">COMPOSANTES DE MOULYNAK</div>
+                <div class="page-num">3</div>
+            </div>
+        </section>
+
+        <!-- Slide 4: MOULYNAK classique (package.jpg on left) -->
+        <section class="slide">
+            <div class="slide-left-image">
+                <img src="assets/web/produits/Moulynak/package.jpg" alt="Moulynak Classique">
+            </div>
+            <div class="slide-right-info">
+                <img src="assets/web/Logo cycas original.png" alt="CYCAS Logo" class="slide-logo-mini">
+                <div class="slide-eyebrow">Produit Phare</div>
+                <h2 class="slide-title">MOULYNAK<br>Classique</h2>
+                <div class="slide-divider"></div>
+                <div class="slide-text">
+                    <p><strong>Ingrédients :</strong> Mil, fonio, pain de singe (bouye), arachide, haricot/niébé.</p>
+                    <p><strong>Bénéfices :</strong> Apport énergétique immédiat, satiété naturelle prolongée, vitamines et minéraux.</p>
+                    <p><strong>Cibles :</strong> Personnes âgées, convalescents, sportifs, familles.</p>
+                    <p><strong>Usages :</strong> Idéal sous forme de bouillie traditionnelle, crêpes, pancakes, sablés ou ngurbaan.</p>
+                    <p><strong>Formats disponibles :</strong> 100 g, 250 g, 400 g, 1 kg</p>
+                </div>
+                <div class="vertical-watermark">MOULYNAK CLASSIQUE</div>
+                <div class="page-num">4</div>
+            </div>
+        </section>
+
+        <!-- Slide 5: MOULYNAK sans arachide (Moulynak sans arachide.png on left) -->
+        <section class="slide">
+            <div class="slide-left-image studio-shot" style="background-color: #FAF5F3;">
+                <img src="assets/web/produits/Moulynak/Moulynak sans arachide.jpg" alt="Moulynak Sans Arachide">
+            </div>
+            <div class="slide-right-info">
+                <img src="assets/web/Logo cycas original.png" alt="CYCAS Logo" class="slide-logo-mini">
+                <div class="slide-eyebrow">Alternative Santé</div>
+                <h2 class="slide-title">MOULYNAK<br>Sans Arachide</h2>
+                <div class="slide-divider"></div>
+                <div class="slide-text">
+                    <p><strong>Ingrédients :</strong> Mil, fonio, pain de singe (bouye), haricot/niébé.</p>
+                    <p><strong>Différence :</strong> Une recette élaborée spécifiquement pour les personnes évitant l’arachide, tout en conservant les qualités nutritives de la farine.</p>
+                    <p><strong>Cibles :</strong> Personnes âgées, convalescents, sportifs, familles.</p>
+                    <p><strong>Usages :</strong> Bouillie, crêpes, pancakes, sablés ou ngurbaan.</p>
+                    <p><strong>Formats disponibles :</strong> 100 g, 250 g, 400 g, 1 kg</p>
+                </div>
+                <div class="vertical-watermark">SANS ARACHIDE</div>
+                <div class="page-num">5</div>
+            </div>
+        </section>
+
+        <!-- Slide 6: Farine de mil enrichie -->
+        <section class="slide">
+            <div class="slide-left-image studio-shot" style="background-color: #FAF7F2;">
+                <img src="assets/web/produits/Farine de mil enrichie/Farine de mil enrichie.jpg" alt="Farine de Mil Enrichie">
+            </div>
+            <div class="slide-right-info">
+                <img src="assets/web/Logo cycas original.png" alt="CYCAS Logo" class="slide-logo-mini">
+                <div class="slide-eyebrow">Mil Enrichi</div>
+                <h2 class="slide-title">Farine de Mil<br>Enrichie</h2>
+                <div class="slide-divider"></div>
+                <div class="slide-text">
+                    <p>Une farine de mil enrichie en vitamines et minéraux essentiels.</p>
+                    <p><strong>Apports :</strong> Fer, Zinc, Vitamine A, Acide folique, Potassium, Magnésium, Calcium.</p>
+                    <p><strong>Bénéfices :</strong> Énergie durable, digestion harmonieuse, immunité renforcée et prévention active des carences.</p>
+                    <p><strong>Cibles :</strong> Idéale pour les familles, les enfants en croissance, les femmes enceintes et les personnes âgées.</p>
+                    <p><strong>Formats disponibles :</strong> 250 g, 500 g</p>
+                </div>
+                <div class="vertical-watermark">FARINE DE MIL</div>
+                <div class="page-num">6</div>
+            </div>
+        </section>
+
+        <!-- Slide 7: Graines de citrouille -->
+        <section class="slide">
+            <div class="slide-left-image studio-shot" style="background-color: #F3F7F2;">
+                <img src="assets/web/produits/GraineDecitrouille.jpg" alt="Graines de Citrouille">
+            </div>
+            <div class="slide-right-info">
+                <img src="assets/web/Logo cycas original.png" alt="CYCAS Logo" class="slide-logo-mini">
+                <div class="slide-eyebrow">Collation Saine</div>
+                <h2 class="slide-title">Graines de Citrouille<br>Grillées Salées</h2>
+                <div class="slide-divider"></div>
+                <div class="slide-text">
+                    <p>Une collation saine, croustillante et prête à consommer.</p>
+                    <p><strong>Apports :</strong> Naturellement riche en protéines, magnésium et nutriments essentiels.</p>
+                    <p><strong>Bénéfices :</strong> Aide au tonus musculaire et au bien-être général.</p>
+                    <p><strong>Usages :</strong> Idéal pour les apéritifs, les salades ou comme encas énergétique dans l'après-midi.</p>
+                    <p><strong>Formats disponibles :</strong> 100 g, 150 g, 250 g</p>
+                </div>
+                <div class="vertical-watermark">GRAINES DE CITROUILLE</div>
+                <div class="page-num">7</div>
+            </div>
+        </section>
+
+        <!-- Slide 8: Compote de banane -->
+        <section class="slide">
+            <div class="slide-left-image studio-shot" style="background-color: #FAF9F2;">
+                <img src="assets/web/produits/Compote de banane.jpg" alt="Compote de Banane">
+            </div>
+            <div class="slide-right-info">
+                <img src="assets/web/Logo cycas original.png" alt="CYCAS Logo" class="slide-logo-mini">
+                <div class="slide-eyebrow">Douceur Fruitée</div>
+                <h2 class="slide-title">Compote de Banane<br>CYCAS</h2>
+                <div class="slide-divider"></div>
+                <div class="slide-text">
+                    <p>Une compote de banane locale 100% naturelle et savoureuse.</p>
+                    <p><strong>Apports :</strong> Naturellement riche en potassium, magnésium et calcium. Sans sucre ajouté.</p>
+                    <p><strong>Bénéfices :</strong> Source naturelle d'énergie rapide et saine.</p>
+                    <p><strong>Cibles :</strong> Convient parfaitement aux enfants, adultes, sportifs et personnes âgées.</p>
+                    <p><strong>Usages :</strong> Idéal au petit-déjeuner, en dessert léger ou comme collation à tout moment.</p>
+                    <p><strong>Formats disponibles :</strong> 100 g, 150 g, 250 g</p>
+                </div>
+                <div class="vertical-watermark">COMPOTE DE BANANE</div>
+                <div class="page-num">8</div>
+            </div>
+        </section>
+
+        <!-- Slide 9: Commandes et points de vente (Footer - Textured background) -->
+        <section class="slide textured-bg">
+            <div class="contact-left-branding transparent-bg">
+                <img src="assets/web/Logo cycas original.png" alt="CYCAS Logo">
+                <h2>Commandes & Points de vente</h2>
+                <p>Valorisons ensemble notre économie locale à travers des choix de nutrition sains.</p>
+            </div>
+            <div class="contact-right-minimal transparent-bg">
+                <div class="contact-group">
+                    <h3>Commandes directes</h3>
+                    <p><strong>Téléphones :</strong> <a href="tel:+221786335050">+221 78 633 50 50</a> / <a href="tel:+221766222830">+221 76 622 28 30</a></p>
+                    <p><strong>WhatsApp :</strong> <a href="https://wa.me/221786335050" target="_blank">+221 78 633 50 50</a> / <a href="https://wa.me/221766222830" target="_blank">+221 76 622 28 30</a></p>
+                </div>
+                <div class="contact-group">
+                    <h3>Boutique & Points de vente</h3>
+                    <p><strong>Adresse :</strong> Jamm Space, Dakar, Sénégal</p>
+                    <p>Disponible également en pharmacies partenaires et boutiques locales.</p>
+                </div>
+                <div class="contact-group">
+                    <h3>Canaux en ligne</h3>
+                    <p><strong>Site internet :</strong> <a href="https://site-cycas.vercel.app" target="_blank">site-cycas.vercel.app</a></p>
+                    <p><strong>Réseaux sociaux :</strong> @cycasnutrition</p>
+                </div>
+                <div class="contact-group">
+                    <h3>Moyens de paiement</h3>
+                    <p>Wave, Orange Money, Espèces à la livraison, Commande en ligne</p>
+                </div>
+            </div>
+            <div class="vertical-watermark">NOUS CONTACTER</div>
+            <div class="page-num">9</div>
+        </section>
+    </div>
+</body>
+</html>

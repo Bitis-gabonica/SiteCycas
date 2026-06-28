@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nos Produits - CYCAS</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 </head>
 <body class="page-produits">
     <div id="site-loader" class="site-loader">
@@ -62,39 +62,54 @@
         </div>
     </header>
 
-    <main style="padding: 6rem 0; background-color: #ffffff;">
+    <main class="section-padding" style="background-color: #ffffff;">
         <div class="products-grid reveal-on-scroll">
             <a href="product.html?p=moulynak" class="product-card">
                 <span class="minimal-tag">Produit phare</span>
-                <div class="product-card-image" style="background-image: url('assets/produits/Moulynak/package.jpg'); background-color: #EAEAEA;"></div>
+                <div class="product-card-image" style="background-image: url('assets/produits/Moulynak/package.jpg'); background-color: #EAEAEA;">
+                    <div class="product-image-hover">
+                        <span class="btn-hover-action">Découvrir</span>
+                    </div>
+                </div>
                 <div class="product-card-text">
                     <span class="product-number">Moulynak</span>
-                    <p>Farine composée naturelle sans sucre ajouté. Idéale pour le bien-être des personnes âgées et la convalescence.</p>
+                    <p class="text-justify">Farine composée naturelle sans sucre ajouté. Idéale pour le bien-être des personnes âgées et la convalescence.</p>
                 </div>
             </a>
             <a href="product.html?p=farine" class="product-card">
-                <div class="product-card-image" style="background-image: url('assets/produits/Farine de mil enrichie/Farine de mil enrichie.png'); background-color: #EAEAEA;"></div>
+                <div class="product-card-image" style="background-image: url('assets/produits/Farine de mil enrichie/Farine de mil enrichie.png'); background-color: #EAEAEA;">
+                    <div class="product-image-hover">
+                        <span class="btn-hover-action">Découvrir</span>
+                    </div>
+                </div>
                 <div class="product-card-text">
                     <span class="product-number">Farine de Mil enrichie</span>
-                    <p>Naturelle, locale et enrichie en vitamines et minéraux. L'alliée parfaite de vos petits-déjeuners.</p>
+                    <p class="text-justify">Naturelle, locale et enrichie en vitamines et minéraux. L'alliée parfaite de vos petits-déjeuners.</p>
                 </div>
             </a>
             <a href="product.html?p=marmite" class="product-card">
-                <div class="product-card-image" style="background-image: url('assets/produits/Marmite en terre cuite/marmite en terre cuite.jpg'); background-color: #EAEAEA;"></div>
+                <div class="product-card-image" style="background-image: url('assets/produits/Marmite en terre cuite/marmite en terre cuite.jpg'); background-color: #EAEAEA;">
+                    <div class="product-image-hover">
+                        <span class="btn-hover-action">Découvrir</span>
+                    </div>
+                </div>
                 <div class="product-card-text">
                     <span class="product-number">Marmites en terre cuite</span>
-                    <p>Ustensiles traditionnels pour une cuisson douce. Retrouvez le goût authentique du fait-maison sans excès d'huile.</p>
+                    <p class="text-justify">Ustensiles traditionnels pour une cuisson douce. Retrouvez le goût authentique du fait-maison sans excès d'huile.</p>
                 </div>
             </a>
         </div>
     </main>
 
     <!-- Global CTA Section -->
-    <section class="global-cta-section reveal-on-scroll">
+    <section class="global-cta-section section-padding reveal-on-scroll">
+        <div class="section-header text-center" style="margin-bottom: 2rem;">
+            <span class="section-eyebrow">Achat</span>
+            <h2 class="section-title">Commandez dès maintenant</h2>
+            <p class="section-desc" style="color: rgba(255, 255, 255, 0.8);">Tous nos produits sont disponibles en livraison ou en point de retrait. Contactez-nous pour passer commande ou trouver le revendeur le plus proche.</p>
+        </div>
         <div class="global-cta-content text-center">
-            <h2>Commandez dès maintenant</h2>
-            <p>Tous nos produits sont disponibles en livraison ou en point de retrait. Contactez-nous pour passer commande ou trouver le revendeur le plus proche.</p>
-            <a href="index.html#contact" class="btn-green-solid" style="margin-top: 1rem;">Nous contacter</a>
+            <a href="index.html#contact" class="btn-green-solid">Nous contacter</a>
         </div>
     </section>
 
@@ -116,11 +131,11 @@
                     <h4>Contacts</h4>
                     <div class="contact-item">
                         <span class="contact-sub">Service Client</span>
-                        <p class="contact-detail">+221 00 000 00 00</p>
+                        <p class="contact-detail"><a href="tel:+221786335050">+221 78 633 50 50</a> / <a href="tel:+221766222830">+221 76 622 28 30</a></p>
                     </div>
                     <div class="contact-item">
                         <span class="contact-sub">Email</span>
-                        <p class="contact-detail">contact@cycas.sn</p>
+                        <p class="contact-detail"><a href="mailto:contact@cycas.sn">contact@cycas.sn</a></p>
                     </div>
                     <div class="contact-item">
                         <span class="contact-sub">Réseaux sociaux</span>

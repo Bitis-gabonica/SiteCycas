@@ -5,7 +5,7 @@
 }
 
 body {
-    font-family: 'Manrope', sans-serif;
+    font-family: 'Nunito', sans-serif;
     color: #ffffff;
     background-color: #000;
     overflow-x: hidden;
@@ -56,36 +56,180 @@ body::after {
     z-index: -1;
 }
 
+/* ============================================================
+   UNIFIED LAYOUT & TYPOGRAPHY UTILITIES
+   ============================================================ */
+.section-padding {
+    padding: 8rem 10% !important;
+}
+
+.text-justify {
+    text-align: justify !important;
+    text-justify: inter-word !important;
+}
+
+/* Unified Section Header */
+.section-header {
+    max-width: 800px;
+    margin-bottom: 4rem;
+    width: 100%;
+}
+
+.section-header.text-center {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.section-eyebrow {
+    font-size: 0.9rem !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.15em !important;
+    color: #244230 !important; /* default green */
+    font-weight: 600 !important;
+    display: block !important;
+    margin-bottom: 0.75rem !important;
+}
+
+.section-title {
+    font-size: clamp(2.2rem, 4.5vw, 3.2rem) !important;
+    font-weight: 200 !important; /* Very thin */
+    line-height: 1.15 !important;
+    letter-spacing: -0.03em !important;
+    color: inherit !important;
+    margin-bottom: 1.5rem !important;
+    text-transform: none !important;
+}
+
+.section-desc {
+    font-size: 1.15rem !important;
+    line-height: 1.65 !important;
+    color: #555555 !important;
+    font-weight: 300 !important;
+}
+
+/* Dark section title adaptations */
+.problem-section .section-title,
+.split-impact-section .section-title,
+.global-cta-section .section-title {
+    color: #ffffff !important;
+}
+.problem-section .section-eyebrow,
+.split-impact-section .section-eyebrow,
+.global-cta-section .section-eyebrow {
+    color: #FDFBF5 !important;
+    opacity: 0.8;
+}
+
+/* Product Card Hover Overlay and Premium Badge */
+.product-card-image {
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+.product-image-hover {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background-color: rgba(36, 66, 48, 0.4) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    opacity: 0 !important;
+    transition: opacity 0.35s cubic-bezier(0.165, 0.84, 0.44, 1) !important;
+    z-index: 2 !important;
+    border-radius: 4px !important;
+}
+
+.product-card:hover .product-image-hover {
+    opacity: 1 !important;
+}
+
+.btn-hover-action {
+    background-color: #ffffff !important;
+    color: #244230 !important;
+    padding: 0.6rem 1.5rem !important;
+    border-radius: 50px !important;
+    font-size: 0.8rem !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+    transform: translateY(15px) !important;
+    transition: transform 0.35s cubic-bezier(0.165, 0.84, 0.44, 1) !important;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15) !important;
+}
+
+.product-card:hover .btn-hover-action {
+    transform: translateY(0) !important;
+}
+
+/* Premium Badge */
+.minimal-tag {
+    position: absolute !important;
+    top: 1rem !important;
+    left: 1rem !important;
+    font-size: 0.7rem !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+    color: #ffffff !important;
+    background-color: #244230 !important; /* solid green */
+    padding: 0.35rem 0.85rem !important;
+    border-radius: 50px !important;
+    box-shadow: 0 4px 12px rgba(36, 66, 48, 0.25) !important;
+    z-index: 10 !important;
+    margin: 0 !important;
+}
+
+/* Uniform typography overrides */
+input, textarea, select, button {
+    font-family: 'Manrope', sans-serif !important;
+}
+
 /* Navbar */
 .navbar {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    padding: 1.5rem 3rem;
+    top: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 1200px;
+    padding: 0.8rem 2.5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    z-index: 100;
-    background-color: transparent;
-    transition: background-color 0.3s ease, backdrop-filter 0.3s ease, -webkit-backdrop-filter 0.3s ease, box-shadow 0.3s ease, padding 0.3s ease;
+    z-index: 1000;
+    background-color: rgba(13, 15, 14, 0.5) !important; /* dark glass default */
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    border-radius: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2) !important;
+    transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 /* Scrolled Navbar State */
 .navbar.scrolled {
-    background-color: transparent !important;
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
-    box-shadow: none !important;
-    border-bottom: none !important;
-    padding: 1rem 3rem;
+    top: 1rem;
+    padding: 0.6rem 2.5rem;
+    background-color: rgba(13, 15, 14, 0.8) !important;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35) !important;
 }
 
-/* Scrolled Navbar Light State */
+/* Navbar Light variant (for white/cream backgrounds or scrolled-light) */
+.navbar.navbar-light {
+    background-color: rgba(253, 251, 245, 0.75) !important; /* light cream glass */
+    border: 1px solid rgba(36, 66, 48, 0.08) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05) !important;
+}
+
 .navbar-light.navbar.scrolled {
-    background-color: transparent !important;
-    box-shadow: none !important;
-    border-bottom: none !important;
+    top: 1rem;
+    padding: 0.6rem 2.5rem;
+    background-color: rgba(253, 251, 245, 0.9) !important;
+    box-shadow: 0 12px 40px rgba(36, 66, 48, 0.08) !important;
 }
 
 /* Logo Image */
@@ -607,7 +751,7 @@ body::after {
 .ceo-image-wrapper {
     flex: 0.8;
     position: relative;
-    height: 450px;
+    height: 550px;
     display: flex;
     align-items: flex-end;
 }
@@ -657,7 +801,7 @@ body::after {
 }
 
 .ceo-quote blockquote {
-    font-size: 1.15rem;
+    font-size: 1.4rem;
     font-weight: 300;
     line-height: 1.6;
     color: #111111;
@@ -666,7 +810,7 @@ body::after {
 }
 
 .ceo-name-group h3 {
-    font-size: 2.2rem;
+    font-size: 2.6rem;
     font-weight: 200;
     line-height: 1.1;
     color: #244230;
@@ -675,7 +819,7 @@ body::after {
 }
 
 .ceo-role {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     color: #666666;
     font-weight: 400;
     text-transform: uppercase;
@@ -751,11 +895,13 @@ body::after {
 }
 
 .ceo-message-text p {
-    font-size: 0.95rem;
-    line-height: 1.6;
+    font-size: 1.1rem;
+    line-height: 1.7;
     color: #444444;
     font-weight: 300;
-    margin-bottom: 1rem;
+    margin-bottom: 1.2rem;
+    text-align: justify;
+    text-justify: inter-word;
 }
 
 /* Roadmap Items */
@@ -1278,6 +1424,15 @@ body::after {
     line-height: 1.6;
     margin-bottom: 1.5rem;
     color: rgba(255,255,255,0.9);
+}
+
+.contact-detail a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.contact-detail a:hover {
+    text-decoration: underline;
 }
 
 .btn-map-outline {
@@ -2581,7 +2736,7 @@ body::after {
 }
 
 .loader-tagline {
-    font-family: 'Manrope', sans-serif;
+    font-family: 'Nunito', sans-serif;
     font-weight: 300;
     font-size: clamp(0.9rem, 2.0vw, 1.5rem);
     color: #244230;
