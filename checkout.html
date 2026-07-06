@@ -41,19 +41,25 @@
         }
         .nav-links a:hover, .nav-links a.active { color: var(--green); }
         .nav-action { display: flex; align-items: center; gap: 1.25rem; }
-        .nav-cart {
-            display: flex; align-items: center; gap: 0.45rem;
-            color: var(--muted); text-decoration: none;
-            font-size: 0.72rem; font-weight: 500;
-            letter-spacing: 0.1em; text-transform: uppercase; transition: color 0.2s;
+        .nav-cart-icon {
+            position: relative; display: flex; align-items: center; justify-content: center;
+            width: 42px; height: 42px; color: var(--black); text-decoration: none;
+            opacity: 0.75; transition: opacity 0.2s; flex-shrink: 0;
         }
-        .nav-cart:hover { color: var(--green); }
-        .cart-n {
-            display: inline-flex; align-items: center; justify-content: center;
-            width: 17px; height: 17px;
-            background: var(--green); color: #fff;
-            border-radius: 50%; font-size: 0.58rem; font-weight: 700;
+        .nav-cart-icon:hover { opacity: 1; }
+        .nav-cart-badge {
+            position: absolute; top: 0; right: 0;
+            min-width: 15px; height: 15px;
+            background: #e05c3a; color: #fff; border-radius: 50px;
+            font-size: 0.48rem; font-weight: 700;
+            display: flex; align-items: center; justify-content: center;
+            padding: 0 3px; line-height: 1;
+            opacity: 0; transform: scale(0.4);
+            transition: opacity 0.2s, transform 0.25s cubic-bezier(0.34,1.56,0.64,1);
+            pointer-events: none;
         }
+        .nav-cart-badge.has-items { opacity: 1; transform: scale(1); }
+        .drawer-logo { display: none; }
         .btn-outline {
             padding: 0.45rem 1.1rem; border: 1px solid rgba(17,17,17,0.15);
             border-radius: 50px; color: var(--black); text-decoration: none;
@@ -305,82 +311,89 @@
         .hamburger.is-open span:nth-child(2) { opacity: 0; }
         .hamburger.is-open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
 
-        @media (max-width: 780px) {
-            .navbar { padding: 0 1.5rem; }
-            .logo, .nav-action { position: relative; z-index: 201; }
-            .hamburger { display: flex; }
+        /* ── NAVBAR MOBILE / TABLETTE (aligne sur nav.js + style.css) ── */
+        @media (max-width: 1080px) {
+            .navbar {
+                padding: 0.5rem 1rem;
+                background: rgba(36, 66, 48, 0.95);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                box-shadow: 0 4px 30px rgba(0, 0, 0, 0.25);
+                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+                justify-content: flex-end;
+            }
+            .logo { display: none; }
+            .nav-action { position: relative; z-index: 101; display: flex; align-items: center; gap: 1.2rem; }
             .nav-action .btn-outline { display: none; }
-            
-            /* Premium full screen drawer */
+            .hamburger { display: flex; color: rgba(255, 255, 255, 0.9); }
+            .hamburger span { background-color: rgba(255, 255, 255, 0.9); }
+            .nav-cart-icon { color: #ffffff; opacity: 0.95; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.3)); }
+            .nav-cart-icon svg { stroke: #ffffff; }
+
+            /* Tiroir plein ecran */
             .nav-links {
-                display: flex !important;
+                display: flex;
                 flex-direction: column;
                 justify-content: flex-start;
                 align-items: flex-start;
                 position: fixed;
-                top: 0;
-                left: 0;
+                top: 0; left: 0;
                 width: 100%;
-                height: 100vh;
-                background: rgba(253, 251, 245, 0.85);
-                backdrop-filter: blur(20px);
-                -webkit-backdrop-filter: blur(20px);
+                height: 100vh; height: 100dvh;
+                background: rgba(36, 66, 48, 0.95);
+                backdrop-filter: blur(25px);
+                -webkit-backdrop-filter: blur(25px);
                 padding: 7rem 2rem 2rem 2rem;
-                z-index: 199;
+                z-index: 99;
                 gap: 0.5rem;
                 transform: translateY(-100%);
                 opacity: 0;
                 pointer-events: none;
                 transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
             }
-            .nav-links.nav-open {
-                transform: translateY(0);
-                opacity: 1;
-                pointer-events: auto;
-            }
+            .nav-links.nav-open { transform: translateY(0); opacity: 1; pointer-events: auto; }
             .nav-links a {
-                font-size: 1.5rem;
-                font-weight: 300;
-                width: 100%;
+                font-size: 1.5rem; font-weight: 300; width: 100%;
                 padding: 0.9rem 0;
-                border-bottom: 1px solid var(--divider);
-                color: var(--black);
-                opacity: 0;
-                transform: translateY(20px);
+                border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+                color: rgba(255, 255, 255, 0.85);
+                opacity: 0; transform: translateY(20px);
                 transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease;
             }
-            .nav-links.nav-open a {
-                opacity: 1;
-                transform: translateY(0);
-            }
-            .nav-links a:last-child {
-                border-bottom: none;
-            }
-            
-            /* Staggered entrance delays */
-            .nav-links.nav-open a:nth-child(1) { transition-delay: 0.08s; }
-            .nav-links.nav-open a:nth-child(2) { transition-delay: 0.12s; }
-            .nav-links.nav-open a:nth-child(3) { transition-delay: 0.16s; }
-            .nav-links.nav-open a:nth-child(4) { transition-delay: 0.20s; }
-            .nav-links.nav-open a:nth-child(5) { transition-delay: 0.24s; }
-            .nav-links.nav-open a:nth-child(6) { transition-delay: 0.28s; }
-            .nav-links.nav-open a:nth-child(7) { transition-delay: 0.32s; }
+            .nav-links.nav-open a { opacity: 1; transform: translateY(0); }
+            .nav-links a:last-child { border-bottom: none; }
 
-            /* Mobile Contact Link Button Style */
+            /* Logo en tete du tiroir (injecte par nav.js) */
+            .nav-links .drawer-logo {
+                display: block; height: 64px; width: auto; margin-bottom: 1.2rem;
+                opacity: 0; transform: translateY(20px);
+                transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease;
+            }
+            .nav-links.nav-open .drawer-logo { opacity: 1; transform: translateY(0); transition-delay: 0.05s; }
+
+            /* Staggered entrance delays (le logo occupe la 1re place) */
+            .nav-links.nav-open a:nth-child(2) { transition-delay: 0.08s; }
+            .nav-links.nav-open a:nth-child(3) { transition-delay: 0.12s; }
+            .nav-links.nav-open a:nth-child(4) { transition-delay: 0.16s; }
+            .nav-links.nav-open a:nth-child(5) { transition-delay: 0.20s; }
+            .nav-links.nav-open a:nth-child(6) { transition-delay: 0.24s; }
+            .nav-links.nav-open a:nth-child(7) { transition-delay: 0.28s; }
+            .nav-links.nav-open a:nth-child(8) { transition-delay: 0.32s; }
+
+            /* Bouton Contact dans le tiroir */
             .nav-links a.nav-mobile-contact {
-                display: flex !important;
-                justify-content: center;
-                align-items: center;
-                margin-top: 1.5rem;
-                padding: 0.9rem 2rem;
-                border: 1px solid rgba(36, 66, 48, 0.25);
+                display: flex; justify-content: center; align-items: center;
+                margin-top: 1.5rem; padding: 0.9rem 2rem;
+                border: 1px solid rgba(255, 255, 255, 0.2);
                 border-radius: 50px;
-                font-size: 1.1rem;
-                font-weight: 400;
-                background: rgba(36, 66, 48, 0.05);
-                color: var(--green);
+                font-size: 1.1rem; font-weight: 400;
+                background: rgba(255, 255, 255, 0.05);
+                color: #ffffff;
             }
+        }
 
+        /* ── MISE EN PAGE MOBILE ─────────────────────────────── */
+        @media (max-width: 780px) {
             .main { grid-template-columns: 1fr; }
             .col-form { padding: 3rem 1.5rem; border-right: none; border-bottom: 1px solid var(--divider); }
             .col-sum { padding: 2.5rem 1.5rem; }
@@ -540,15 +553,14 @@
         <a href="blog.html">Blog / Actualités</a>
     </div>
     <div class="nav-action">
-        <a href="panier.html" class="nav-cart">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <a href="contact.html" class="btn-outline">Contact</a>
+        <a href="panier.html" class="nav-cart-icon" aria-label="Panier">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
                 <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
                 <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
             </svg>
-            Panier
-            <span class="cart-n" id="cart-n">0</span>
+            <span class="nav-cart-badge" id="cart-badge">0</span>
         </a>
-        <a href="contact.html" class="btn-outline">Contact</a>
         <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
             <span></span><span></span><span></span>
         </button>
@@ -704,7 +716,9 @@ function renderSummary(){
     oWrap.innerHTML=''; sWrap.innerHTML='';
 
     const count=items.reduce((a,i)=>a+i.qty,0);
-    document.getElementById('cart-n').textContent=count;
+    const badge=document.getElementById('cart-badge');
+    badge.textContent=count;
+    badge.classList.toggle('has-items',count>0);
 
     if(!items.length){
         oWrap.innerHTML='<p style="font-size:0.78rem;color:var(--muted);padding:1rem 0">Panier vide</p>';
@@ -782,28 +796,49 @@ const EJS_TEMPLATE_ID = 'template_a49xad9';
 
 (function(){ emailjs.init({ publicKey: EJS_PUBLIC_KEY }); })();
 
-function handleMobilePayment(items){
+function buildOrderId(){
+    return 'CMD-' + new Date().toISOString().slice(0,10).replace(/-/g,'') + '-' + Math.floor(Math.random()*9000+1000);
+}
+
+// Construit les paramètres du template EmailJS (partagés par les 2 modes de paiement)
+function buildEmailParams(items, orderId, mode){
     const c = checkoutCustomer();
-    const orderId = 'CMD-' + new Date().toISOString().slice(0,10).replace(/-/g,'') + '-' + Math.floor(Math.random()*9000+1000);
     const sub = items.reduce((a,i) => a + i.price * i.qty, 0);
     const ship = sub >= SHIP ? 0 : 2500;
     const total = sub + ship;
-
     const lines = items.map(i => `- ${i.name} x${i.qty} (${i.size}) = ${(i.price*i.qty).toLocaleString('fr-FR')} CFA`).join('\n');
+    return {
+        total: total,
+        params: {
+            order_id:      orderId,
+            client:        c.first_name + ' ' + c.last_name,
+            phone:         c.phone,
+            email_client:  c.email || '—',
+            adresse:       c.address + ', ' + c.city + ', ' + c.region,
+            panier:        lines,
+            sous_total:    sub.toLocaleString('fr-FR') + ' CFA',
+            livraison:     ship === 0 ? 'Gratuite' : ship.toLocaleString('fr-FR') + ' CFA',
+            total:         total.toLocaleString('fr-FR') + ' CFA',
+            mode_paiement: mode
+        }
+    };
+}
+
+function showSuccess(){
+    localStorage.removeItem('cycas_items');
+    localStorage.removeItem('cycas_pending_order');
+    localStorage.removeItem('cycas_pending_email');
+    document.getElementById('success').classList.add('show');
+    document.body.style.overflow='hidden';
+}
+
+function handleMobilePayment(items){
+    const orderId = buildOrderId();
+    const { params, total } = buildEmailParams(items, orderId, 'Wave / Orange Money — NabooPay');
 
     // Stocker les params email en attendant le retour NabooPay
     localStorage.setItem('cycas_pending_order', JSON.stringify({ order_id: orderId, total, created_at: new Date().toISOString() }));
-    localStorage.setItem('cycas_pending_email', JSON.stringify({
-        order_id:     orderId,
-        client:       c.first_name + ' ' + c.last_name,
-        phone:        c.phone,
-        email_client: c.email || '—',
-        adresse:      c.address + ', ' + c.city + ', ' + c.region,
-        panier:       lines,
-        sous_total:   sub.toLocaleString('fr-FR') + ' CFA',
-        livraison:    ship === 0 ? 'Gratuite' : ship.toLocaleString('fr-FR') + ' CFA',
-        total:        total.toLocaleString('fr-FR') + ' CFA'
-    }));
+    localStorage.setItem('cycas_pending_email', JSON.stringify(params));
 
     // Construire le lien NabooPay avec URL de retour
     const base = location.origin + location.pathname;
@@ -822,6 +857,19 @@ function handleMobilePayment(items){
     setSubmitting(false);
 }
 
+// Paiement à la livraison : notifier le marchand immédiatement puis confirmer
+function handleCashPayment(items){
+    setSubmitting(true,'Envoi…');
+    const orderId = buildOrderId();
+    const { params } = buildEmailParams(items, orderId, 'Paiement à la livraison');
+    emailjs.send(EJS_SERVICE_ID, EJS_TEMPLATE_ID, params)
+        .catch(function(){})
+        .finally(function(){
+            setSubmitting(false);
+            showSuccess();
+        });
+}
+
 function submitOrder(e){
     e.preventDefault();
     const form=document.getElementById('form');
@@ -835,10 +883,7 @@ function submitOrder(e){
     showCheckoutError('');
 
     if(selectedPayment()==='livraison'){
-        localStorage.removeItem('cycas_items');
-        localStorage.removeItem('cycas_pending_order');
-        document.getElementById('success').classList.add('show');
-        document.body.style.overflow='hidden';
+        handleCashPayment(items);
         return;
     }
 
