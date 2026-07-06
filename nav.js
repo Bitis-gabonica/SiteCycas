@@ -18,6 +18,12 @@ document.addEventListener('DOMContentLoaded', function () {
     // ── Sticky Navbar Scroll Effect & Dynamic Theme ─────────────────────
     var navbar = document.querySelector('.navbar');
     if (navbar) {
+        // Page d'accueil : le logo navbar ne s'affiche en mobile qu'ici (en haut)
+        var path = location.pathname;
+        if (/(?:^|\/)index\.html$/.test(path) || /\/$/.test(path)) {
+            navbar.classList.add('navbar-home');
+        }
+
         // Store if the navbar was default light in the HTML
         var isDefaultLight = navbar.classList.contains('navbar-light');
 
@@ -34,12 +40,12 @@ document.addEventListener('DOMContentLoaded', function () {
             // Determine if navbar is over a dark or light section
             var overLight = isDefaultLight;
 
-            if (window.innerWidth <= 768) {
-                // On mobile, keep it dark always to ensure visibility and contrast
+            if (window.innerWidth <= 1080) {
+                // En mode hamburger (mobile/tablette), navbar toujours sombre pour le contraste
                 overLight = false;
             } else if (!isDefaultLight) {
                 // On index page, check overlap with light sections
-                var lightSections = document.querySelectorAll('.products-section, .vision-section, .ceo-section, .split-impact-section, .frieze-section, .testimonials-section');
+                var lightSections = document.querySelectorAll('.products-section, .vision-section, .ceo-section, .split-impact-section, .axes-section, .testimonials-section');
                 lightSections.forEach(function(sec) {
                     var rect = sec.getBoundingClientRect();
                     if (rect.top <= navbarBottom && rect.bottom >= 0) {
@@ -129,6 +135,31 @@ document.addEventListener('DOMContentLoaded', function () {
         var links = navContainer ? navContainer.querySelector('.nav-links') : null;
 
         if (links) {
+            // Le tiroir mobile est en position:fixed, mais la navbar (transform +
+            // backdrop-filter) devient son bloc conteneur et le decale. On le
+            // deplace donc dans <body> en mobile pour qu'il couvre tout l'ecran.
+            var navAction = navContainer.querySelector('.nav-action');
+            var mq = window.matchMedia('(max-width: 1080px)');
+
+            // Logo en tete du tiroir mobile (le CSS le cache hors mode hamburger)
+            if (!links.querySelector('.drawer-logo')) {
+                var drawerLogo = document.createElement('img');
+                drawerLogo.src = 'assets/lg CYCAS blanc.png';
+                drawerLogo.alt = 'CYCAS';
+                drawerLogo.className = 'drawer-logo';
+                links.insertBefore(drawerLogo, links.firstChild);
+            }
+            var placeLinks = function () {
+                if (mq.matches) {
+                    if (links.parentElement !== document.body) document.body.appendChild(links);
+                } else if (links.parentElement !== navContainer) {
+                    navContainer.insertBefore(links, navAction);
+                }
+            };
+            placeLinks();
+            if (mq.addEventListener) { mq.addEventListener('change', placeLinks); }
+            else if (mq.addListener) { mq.addListener(placeLinks); }
+
             // Dynamically inject Contact link into mobile navigation list if not already present
             var hasContact = false;
             links.querySelectorAll('a').forEach(function (a) {
@@ -162,7 +193,7 @@ document.addEventListener('DOMContentLoaded', function () {
             });
 
             document.addEventListener('click', function (e) {
-                if (navContainer && !navContainer.contains(e.target)) {
+                if (navContainer && !navContainer.contains(e.target) && !links.contains(e.target)) {
                     if (links.classList.contains('nav-open')) {
                         links.classList.remove('nav-open');
                         btn.classList.remove('is-open');
